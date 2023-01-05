@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/rightNavigation.scss";
+import "../../styles/rightNavigation.scss";
 import DisplayTime from "./DisplayTime";
 
 import { Routes, Route } from "react-router-dom";
@@ -18,7 +18,7 @@ function RightNavigation(props) {
             <Route
         path="/"
         element={
-          <MainCalendar
+          <MainCalendar input={props.input} setInput={props.setInput} data={props.data} setData={props.setData}
             display={display}
             value={value}
             onChange={onChange}

@@ -1,6 +1,6 @@
 .left-navigation{
     // position: absolute;
-    width: 25%;
+    width: 380px;
     padding: 20px;
     height: calc(100vh - 70px);
     box-sizing: border-box;
@@ -9,8 +9,10 @@
     position: fixed;
     top:68px;
     // height: calc(100vh - 70px);
-    // background-image: linear-gradient(90deg,#bd2e7a 0%,#6a16ac 100%);
+    background-image: linear-gradient(#100333, #BD2E7A);
     // background-color: #250778;
+    // background-color:#ebadce;
+    opacity: 1;
 
 }
 .left-iconclick{
@@ -51,7 +53,7 @@
     line-height: 1.4;
     background: white;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 25px;
     width: 500px;
     // min-width: 300px;
     // z-index: 2;
@@ -81,12 +83,23 @@ body.active-modal {
     font-size: 20px;
     color:white;
     padding-bottom: 20px;
+    // float: left;
+}
+.title div,.date div,.from-time div,.to-time div{
+width: 50px;
 }
 .title input ,.date input ,.from-time input,.to-time input{
     width: 80%;
     font-size: 16px;
     margin-left: 20px;
-    padding: 5px;
+    padding: 10px;
+    border: 2px solid #BD2E7A;
+    border-radius: 15px;
+    // float:right;
+}
+.title input ,.date input ,.from-time input,.to-time input:focus{
+    outline: none;
+    border-color: #BD2E7A;
 }
 
 .add{
@@ -95,4 +108,8 @@ body.active-modal {
     font-weight: bold;
     color: white;
     padding-bottom: 20px;
+}
+
+.modal button{
+    float:right;
 }

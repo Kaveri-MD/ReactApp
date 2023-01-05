@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/leftNavigation.scss"
+import "../../styles/calendar.scss"
 
 function Cell(props){
     const isActive = props.isActive

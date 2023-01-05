@@ -1,6 +1,6 @@
-import React from 'react'
+import React ,{useEffect} from 'react'
 import { format } from "date-fns";
-import Calendar from "../components/Calendar";
+import Calendar from "../Calendar/Calendar";
 import { Link } from 'react-router-dom';
 function MainCalendar(props) {
     // const display = props.display;
@@ -8,6 +8,8 @@ function MainCalendar(props) {
   const onChange = props.onChange;
   const prevMonth =props.prevMonth;
   const nextMonth = props.nextMonth;
+
+ 
   return (
     <div className="month">
       <div className="main-calendar">
@@ -17,7 +19,8 @@ function MainCalendar(props) {
           
         </div>
 
-        <Calendar
+        <Calendar input={props.input} setInput={props.setInput} data={props.data} setData={props.setData}
+        
           value={value}
           onChange={onChange}
           prevMonth={prevMonth}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ListItem } from "../lists/List";
+import { ListItem } from "../../lists/List";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 function DisplayTime({ value }) {
@@ -20,8 +20,8 @@ function DisplayTime({ value }) {
           ))}
         </div>
         <div className="row">
-          {ListItem.map(() => (
-            <div className="horizontal-bar"></div>
+          {ListItem.map((item) => (
+            <div className="horizontal-bar">{item.event}</div>
           ))}
         </div>
       </div>
