@@ -22,6 +22,7 @@ function CreateModal(props) {
     setData([...data,input])
     console.log(data);
     props.toggleModal();
+    setInput("")
     // setData([input,...data]);
  
     // console.log(input);

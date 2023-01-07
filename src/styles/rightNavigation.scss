@@ -5,6 +5,9 @@
     width: 75%;
     top:68px;
     z-index: -1;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    // background-image: linear-gradient(#100333, #BD2E7A);
     // border: 2px solid black;
     // padding: 20px;
     // height: calc(100vh - 70px);
@@ -34,7 +37,7 @@
 .row{
     display: grid;
     grid-template-columns: auto ;
-    width: 95%;
+    width: 60%;
     // padding: 10px;
 }
 .horizontal-bar{
@@ -42,6 +45,7 @@
     height: 50px;
     border-top: 1px solid;
     border-left: 1px solid;
+    z-index: 1;
 }
 .time-chart{
     display: flex;
@@ -70,13 +74,14 @@
     // opacity: 0;
     height: 75vh;
     // height: 550px;
-    background-color: white;
     z-index: -1;
     color: black;
+    background-color: white;
 }
 .main-calendar .calendar-week{
     border-bottom: 1px solid;
     border-right: 1px solid;
+    // box-sizing: border-box;
     // border-radius: 25px;
     // height: 100%;
 }
@@ -85,6 +90,7 @@
     border-right: 1px solid;
     display: inline;
     text-align: center;
+    // box-sizing: border-box;
     // height: 100%;
     // border-radius: 25px;
 }
@@ -101,6 +107,14 @@
 }
 .main-calendar .display-event{
     display: block;
+    padding: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #dbcffc;
+    border-left: 5px solid #100333;
+    color: #100333;
+    // border-radius: 25px;
+    // width: 20%;
 }
 .text{
     // padding: 10px;
@@ -132,4 +146,16 @@
     margin-right:10px ;
     // margin-bottom: 10px;
     // z-index: -1;
+}
+.display-eventbar{
+    font-weight: bold;
+    position:absolute;
+    padding-left: 10px;
+    margin-left:1px ;
+    width: 60%;
+    background-color: #f5d6e7;
+    color: #BD2E7A;
+    border-left:5px solid #BD2E7A;
+    // left:75px;
+    box-sizing: border-box;
 }

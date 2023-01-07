@@ -74,7 +74,7 @@ function Calendar(props) {
           const date = index + 1;
           const isCurrentDate = date === value.getDate();
 
-          console.log(value.getDate());
+          // console.log(value.getDate());
 
           return (
             <div className="calendar-item" onClick={() => selectedDate(date)}>

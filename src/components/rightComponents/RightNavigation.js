@@ -28,7 +28,7 @@ function RightNavigation(props) {
         }
       />
 
-        <Route path="/day" element={<DisplayTime value={props.value} />} />
+        <Route path="/day" element={<DisplayTime value={props.value} data={props.data} />} />
           
        
      
