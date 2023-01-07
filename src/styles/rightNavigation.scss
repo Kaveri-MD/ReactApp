@@ -49,6 +49,10 @@
 }
 .time-chart{
     display: flex;
+    // position: absolute;
+    // top:90px;
+    // width: 1000px;
+    padding-top: 100px;
 }
 .month{
     padding: 20px;
@@ -128,11 +132,16 @@
     justify-content: space-between;
     margin-bottom: 20px;
     margin-top: 10px;
+   
 }
 .display-day{
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 75%;
+    background-color: white;
+    z-index: 2;
 }
 .primary-button{
     text-decoration: none;
@@ -158,4 +167,5 @@
     border-left:5px solid #BD2E7A;
     // left:75px;
     box-sizing: border-box;
+    // padding-top: 100px;
 }
