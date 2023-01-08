@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useContext} from "react";
 import Calendar from "../Calendar/Calendar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -6,11 +6,12 @@ import "../../styles/leftNavigation.scss";
 import Modal from "react-modal"
 import Draggable from 'react-draggable';
 import CreateModal from "./CreateModal";
+import { ReferenceDataContext } from "../context/ReferenceDataContext";
 
-
-function LeftNavigation(props) {
-  const prevMonth = props.prevMonth;
-  const nextMonth = props.nextMonth;
+function LeftNavigation() {
+  const {display,prevMonth,nextMonth} = useContext(ReferenceDataContext);
+  // const prevMonth = props.prevMonth;
+  // const nextMonth = props.nextMonth;
 
   const [modal, setModal] = useState(false);
 
@@ -25,22 +26,17 @@ function LeftNavigation(props) {
   }
 
   return (
-    <div className={props.display ? "left-navigation" : "left-iconclick"}>
+    <div className={display ? "left-navigation" : "left-iconclick"}>
       <button onClick={toggleModal} className="create">
         <FontAwesomeIcon className="plus" icon={faPlus} />
         Create
       </button>
-      <Calendar input={props.input} setInput={props.setInput} data={props.data} setData={props.setData}
-        value={props.value}
-        onChange={props.onChange}
-        prevMonth={prevMonth}
-        nextMonth={nextMonth}
-      />
+      <Calendar />
       
       
       {modal && <Modal isOpen={modal} ariaHideApp={false} className="modal">
       
-          <CreateModal toggleModal={toggleModal} input={props.input} setInput={props.setInput} data={props.data} setData={props.setData}/>
+          <CreateModal toggleModal={toggleModal} />
          
       </Modal> }
       

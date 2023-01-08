@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import "../styles/header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,14 +8,18 @@ import {
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { format } from "date-fns";
+import {ReferenceDataContext} from "./context/ReferenceDataContext"
 // import { Routes, Route } from "react-router-dom";
-function Header(props) {
-  const onChange = props.onChange;
-  const value = props.value;
-  const prevMonth = props.prevMonth;
-  const nextMonth = props.nextMonth;
+
+function Header() {
+
+  // const onChange = props.onChange;
+  // const value = props.value;
+  // const prevMonth = props.prevMonth;
+  // const nextMonth = props.nextMonth;
+  const { view,value,onChange,prevMonth,nextMonth} = useContext(ReferenceDataContext);
   function iconClick() {
-    props.view();
+    view();
   }
   function handleSetToday() {
     onChange(new Date());

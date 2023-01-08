@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -13,15 +13,18 @@ import {
 } from "date-fns";
 import "../../styles/calendar.scss";
 import Cell from "./Cell";
-import useCreateEvent from "../Hooks/useCreateEvent";
+import {ReferenceDataContext} from "../context/ReferenceDataContext"
+import useCreateEvent from "../context/useCreateEvent";
 
-function Calendar(props) {
-  const { input, setInput, data, setData } = props;
+function Calendar() {
 
-  const value = props.value;
-  const onChange = props.onChange;
-  const prevMonth = props.prevMonth;
-  const nextMonth = props.nextMonth;
+  const { data,value,onChange,prevMonth,nextMonth} = useContext(ReferenceDataContext);
+  // const { input, setInput, data, setData } = props;
+
+  // const value = props.value;
+  // const onChange = props.onChange;
+  // const prevMonth = props.prevMonth;
+  // const nextMonth = props.nextMonth;
 
   const weeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const startDate = startOfMonth(value);

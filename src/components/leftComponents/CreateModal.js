@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect ,useContext} from 'react'
 import {useState} from 'react'
+import { ReferenceDataContext } from '../context/ReferenceDataContext'
 
 function CreateModal(props) {
 
@@ -14,8 +15,9 @@ function CreateModal(props) {
   // useEffect(()=>{
   //   addInput()
   // },[])
+  const { input,setInput,data,setData} = useContext(ReferenceDataContext);
+  // const {input,setInput,data,setData} = props
 
-  const {input,setInput,data,setData} = props
   const addInput=(e)=>{
     // e.preventDefault();
     

@@ -1,13 +1,15 @@
-import React ,{useEffect} from 'react'
+import React ,{useContext} from 'react'
 import { format } from "date-fns";
 import Calendar from "../Calendar/Calendar";
 import { Link } from 'react-router-dom';
-function MainCalendar(props) {
+import { ReferenceDataContext } from '../context/ReferenceDataContext';
+function MainCalendar() {
+  const { value,onChange,prevMonth,nextMonth,data,setData,input,setInput} = useContext(ReferenceDataContext);
     // const display = props.display;
-  const value = props.value;
-  const onChange = props.onChange;
-  const prevMonth =props.prevMonth;
-  const nextMonth = props.nextMonth;
+  // const value = props.value;
+  // const onChange = props.onChange;
+  // const prevMonth =props.prevMonth;
+  // const nextMonth = props.nextMonth;
 
  
   return (
@@ -19,13 +21,7 @@ function MainCalendar(props) {
           
         </div>
 
-        <Calendar input={props.input} setInput={props.setInput} data={props.data} setData={props.setData}
-        
-          value={value}
-          onChange={onChange}
-          prevMonth={prevMonth}
-          nextMonth={nextMonth}
-        />
+        <Calendar />
       </div>
     </div>
       

@@ -169,3 +169,22 @@
     box-sizing: border-box;
     // padding-top: 100px;
 }
+
+.agenda{
+    border:1px solid;
+    width: 23%;
+    position: fixed;
+    right: 0;
+    height: 100%;
+    background-color: #100333;
+    
+}
+.event-notes{
+   background-color: #BD2E7A;
+   color: white;
+   margin: 20px;
+   border-radius: 25px;
+   padding:10px 20px;
+   font-size: 16px;
+  font-weight: bold;
+}
