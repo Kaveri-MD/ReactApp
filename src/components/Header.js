@@ -6,6 +6,7 @@ import {
   faMagnifyingGlass,
   faAngleLeft,
   faAngleRight,
+  
 } from "@fortawesome/free-solid-svg-icons";
 import { format } from "date-fns";
 import {ReferenceDataContext} from "./context/ReferenceDataContext"
@@ -17,12 +18,12 @@ function Header() {
   // const value = props.value;
   // const prevMonth = props.prevMonth;
   // const nextMonth = props.nextMonth;
-  const { view,value,onChange,prevMonth,nextMonth} = useContext(ReferenceDataContext);
+  const { view,value,setCurrentDate,prevMonth,nextMonth} = useContext(ReferenceDataContext);
   function iconClick() {
     view();
   }
   function handleSetToday() {
-    onChange(new Date());
+    setCurrentDate(new Date());
   }
   return (
     <div className="header">

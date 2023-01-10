@@ -6,12 +6,14 @@ import { Routes, Route } from "react-router-dom";
 import MainCalendar from "./MainCalendar";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 function RightNavigation() {
-  const { display,view,value,onChange,prevMonth,nextMonth} = useContext(ReferenceDataContext);
+  const { display,view,value,setCurrentDate,prevMonth,nextMonth} = useContext(ReferenceDataContext);
   // const display = props.display;
   // const value = props.value;
-  // const onChange = props.onChange;
+  // const setCurrentDate = props.onChange;
   // const prevMonth = props.prevMonth;
   // const nextMonth = props.nextMonth;
+
+
   return (
     
         <div className={display ? "right-navigation" : "right-iconclick"}>

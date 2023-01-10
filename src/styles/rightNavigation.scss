@@ -5,8 +5,8 @@
     width: 75%;
     top:68px;
     z-index: -1;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    // overflow-x: hidden;
+    // overflow-y: hidden;
     // background-image: linear-gradient(#100333, #BD2E7A);
     // border: 2px solid black;
     // padding: 20px;
@@ -18,6 +18,13 @@
 }
 .right-iconclick{
     width:100%;
+
+    .display-day{
+        width: 100%;
+    }
+    .agenda{
+        width: 30%;
+    }
     
     // padding: 20px;
 }
@@ -45,7 +52,7 @@
     height: 50px;
     border-top: 1px solid;
     border-left: 1px solid;
-    z-index: 1;
+    // z-index: 1;
 }
 .time-chart{
     display: flex;
@@ -117,6 +124,7 @@
     background-color: #dbcffc;
     border-left: 5px solid #100333;
     color: #100333;
+    margin-bottom: 1px;
     // border-radius: 25px;
     // width: 20%;
 }
@@ -156,18 +164,29 @@
     // margin-bottom: 10px;
     // z-index: -1;
 }
+.event-name{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+}
 .display-eventbar{
     font-weight: bold;
     position:absolute;
     padding-left: 10px;
     margin-left:1px ;
     width: 60%;
-    background-color: #f5d6e7;
+    // background-color: rgba(242, 175, 212, 0.3);
+    background-color: #f9bbdc90;
     color: #BD2E7A;
     border-left:5px solid #BD2E7A;
     // left:75px;
     box-sizing: border-box;
     // padding-top: 100px;
+    align-items: center;
+    display: flex;
+    // cursor: pointer;
+    // opacity: 1;
 }
 
 .agenda{
@@ -177,7 +196,15 @@
     right: 0;
     height: 100%;
     background-color: #100333;
+    color: white;
+    text-align: center;
     
+    padding-top:10px ;
+    border-radius: 4px;
+}
+.day-planner{
+    font-size: 20px;
+    font-weight: bold;
 }
 .event-notes{
    background-color: #BD2E7A;
@@ -185,6 +212,73 @@
    margin: 20px;
    border-radius: 25px;
    padding:10px 20px;
-   font-size: 16px;
-  font-weight: bold;
+   text-align: left;
+}
+.event-notes .title ,.event-notes .from-time{
+    font-size: 18px;
+    padding-bottom: 5px;
+    
+}
+.event-notes .title-text ,.event-notes .from-text{
+    width: 70px;
+    font-weight: bold;
+}
+
+.xmark{
+    position: absolute;
+    right: 0;
+    padding-right: 20px;
+    font-size: 25px;
+    cursor: pointer;
+}
+.menu{
+    position: absolute;
+    border: 1px solid ;
+    top:35px;
+    right: 30px;
+    padding: 10px;
+    background-color: #100333;
+    color: white;
+    border-radius: 4px;
+    width: 15%;
+    text-align: center;
+    z-index: 1;
+    // height: 100%;
+}
+.menu-inactive{
+    display: none;
+    // background-color: white;
+}
+.dot-icon{
+    padding: 10px;
+    cursor: pointer;
+}
+.edit{
+    padding: 5px 0px;
+    cursor: pointer;
+}
+.delete{
+    padding: 5px 0px;
+    cursor: pointer;    
+}
+.edit:hover{
+    background-color:  #dbcffc;
+    color: #100333;
+}
+
+.delete:hover{
+    background-color:  #dbcffc;
+    color: #100333;
+}
+.delete-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.delete-button .primary-button{
+    margin-right: 0px;
+    margin:5px;
+}
+.delete-modal .modal-content{
+    width: 300px;
 }

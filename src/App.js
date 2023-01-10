@@ -8,12 +8,16 @@ import Header from "./components/Header";
 import  {  ReferenceDataContextProvider } from "../src/components/context/ReferenceDataContext"
 
 
+
 function App() {
   // const {contextdata}
   //  const [prevMonth,nextMonth,value,onChange] = useMonth()
 
   //  const[input,setInput,data,setData] = useCreateEvent();
-
+  // fetch("https://type.fit/api/quotes")
+  // .then((response)=>response.json)
+  // .then((result)=>console.log(result.data));
+  
 
   return (
     <div className="App">

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft,faAngleRight} from "@fortawesome/free-solid-svg-icons";
 import "../styles/calendar.scss";
 function SelectedMonth() {
-  const [prevMonth,nextMonth,value,onChange] = useMonth();
+  const [prevMonth,nextMonth,value,setCurrentDate] = useMonth();
 
 
   return (

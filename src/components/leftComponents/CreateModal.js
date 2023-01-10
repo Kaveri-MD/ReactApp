@@ -1,6 +1,10 @@
 import React, { useEffect ,useContext} from 'react'
 import {useState} from 'react'
 import { ReferenceDataContext } from '../context/ReferenceDataContext'
+import axios from "axios";
+import moment from 'moment';
+import { faUserInjured } from '@fortawesome/free-solid-svg-icons';
+import uuid from 'react-uuid';
 
 function CreateModal(props) {
 
@@ -17,17 +21,27 @@ function CreateModal(props) {
   // },[])
   const { input,setInput,data,setData} = useContext(ReferenceDataContext);
   // const {input,setInput,data,setData} = props
-
-  const addInput=(e)=>{
+  // console.log(moment(input.date + '' +input.to,'YYYY-MM-DDTHH:mm:ss').format("YYYY-MM-DDTHH:mm:ss"))
+  const addInput= (e)=>{
+    console.log(input.title);
+    const creatItem = {
+      id: uuid(),
+      eventName:input.title,
+      fromTime:moment(input.date + '' +input.from,'YYYY-MM-DDTHH:mm:ss').format("YYYY-MM-DDTHH:mm:ss"),
+      toTime: moment(input.date + '' +input.to,'YYYY-MM-DDTHH:mm:ss').format("YYYY-MM-DDTHH:mm:ss")
+    }
     // e.preventDefault();
-    
-    setData([...data,input])
-    console.log(data);
+    const post = axios.post("http://localhost:5169/appointments",creatItem)
+    // setData([...data,post.data])
+    console.log(data,"data");
     props.toggleModal();
     setInput("")
     // setData([input,...data]);
  
     // console.log(input);
+    
+    
+ 
   }
   return (
     <div>
@@ -36,19 +50,19 @@ function CreateModal(props) {
             <div className="add">ADD EVENT</div>
             <form onSubmit={addInput}>
             <div className="title">
-              <div>Title</div>
+              <div className='title-text'>Title</div>
               <input type="text" value={input.title} onChange={(e)=>setInput({...input,title:e.target.value})}></input>
             </div>
             <div className="date">
-              <div>Date</div>
+              <div  className='date-text'>Date</div>
               <input type="date" value={input.date} onChange={(e)=>setInput({...input,date:e.target.value})}></input>
             </div>
             <div className="from-time">
-              <div>From</div>
+              <div  className='from-text'>From</div>
               <input type='time' value={input.from} onChange={(e)=>setInput({...input,from:e.target.value})}></input>
             </div>
             <div className="to-time">
-              <div>To</div>
+              <div  className='to-text'>To</div>
               <input type='time' value={input.to} onChange={(e)=>setInput({...input,to:e.target.value})}></input>
             </div>
             </form>

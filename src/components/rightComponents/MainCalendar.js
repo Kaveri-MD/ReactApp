@@ -4,10 +4,10 @@ import Calendar from "../Calendar/Calendar";
 import { Link } from 'react-router-dom';
 import { ReferenceDataContext } from '../context/ReferenceDataContext';
 function MainCalendar() {
-  const { value,onChange,prevMonth,nextMonth,data,setData,input,setInput} = useContext(ReferenceDataContext);
+  const { value,setCurrentDate,prevMonth,nextMonth,data,setData,input,setInput} = useContext(ReferenceDataContext);
     // const display = props.display;
   // const value = props.value;
-  // const onChange = props.onChange;
+  // const setCurrentDate = props.onChange;
   // const prevMonth =props.prevMonth;
   // const nextMonth = props.nextMonth;
 

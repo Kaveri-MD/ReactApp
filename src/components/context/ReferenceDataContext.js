@@ -19,31 +19,54 @@
 
 import {useState,createContext} from 'react'
 import {sub,add} from "date-fns";
+import axios from "axios";
+
 
 const ReferenceDataContext = createContext();
-    
+
+ 
 
 const ReferenceDataContextProvider = ({children}) => {
   
+    const [display, setDisplay] = useState(true);
     const [currentDate,setCurrentDate] = useState(new Date());
     const [input,setInput] = useState({title:"",date:"",from:"",to:""});
     const [data,setData] = useState([]);
-    const [display, setDisplay] = useState(true);
-    
+    const [getId, setGetId] = useState();
+    // const [modal, setModal] = useState(false);
+
+   
+    // const [getData,setGetData] =useState([]);
+
     const view = ()=>{
       setDisplay(!display)
     }
     const value = currentDate;
-    const onChange = setCurrentDate;
-    console.log(onChange);
+    // const onChange = setCurrentDate;
+    // console.log(setCurrentDate);
     const prevMonth=() =>{
-        onChange(sub(value,{months:1}));
+        setCurrentDate(sub(value,{months:1}));
     }
     const nextMonth=() =>{
-        onChange(add(value,{months:1}));
+        setCurrentDate(add(value,{months:1}));
     }
+
+    // const toggleModal = () => {
+    //   setModal(!modal);
+    //   console.log(modal);
+    // };
+
+    axios.get('http://localhost:5169/appointments')
+  .then( (response) => {
+    // handle success
+    // console.log(response.data);
+    setData(response.data);
+  })   
+
+
+
     return (
-        <ReferenceDataContext.Provider value={{ value,onchange,prevMonth,nextMonth,input,setInput,data,setData,display,view}}>
+        <ReferenceDataContext.Provider value={{ value,setCurrentDate,prevMonth,nextMonth,input,setInput,data,setData,display,view, getId, setGetId }}>
           {children}
         </ReferenceDataContext.Provider>
       );
