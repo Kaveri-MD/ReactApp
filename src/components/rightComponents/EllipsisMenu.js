@@ -31,7 +31,7 @@ function EllipsisMenu(props) {
       )}
         {update && <Modal isOpen={update} ariaHideApp={false} className="modal">
       
-          <UpdateModal Update={Update} filteredEvent={filteredEvent}/>
+          <UpdateModal Update={Update} filteredEvent={filteredEvent} update={update} setUpdate={setUpdate} setIcon={setIcon}/>
          
       </Modal> }
       

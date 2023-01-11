@@ -1,15 +1,15 @@
 import React,{useContext} from "react";
-import "../styles/header.scss";
+import "../../styles/header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
-  faMagnifyingGlass,
   faAngleLeft,
   faAngleRight,
   
 } from "@fortawesome/free-solid-svg-icons";
 import { format } from "date-fns";
-import {ReferenceDataContext} from "./context/ReferenceDataContext"
+import {ReferenceDataContext} from "../context/ReferenceDataContext"
+import SearchEvent from "./SearchEvent";
 // import { Routes, Route } from "react-router-dom";
 
 function Header() {
@@ -45,10 +45,7 @@ function Header() {
       </div>
 
       <div className="right-side">
-        <div className="search-box">
-          <FontAwesomeIcon className="search-icon" icon={faMagnifyingGlass} />
-          <input className="text-area" type="text" placeholder="Search"></input>
-        </div>
+        <SearchEvent/>
         <div className="year">{format(value, "yyyy")}</div>
       </div>
     </div>

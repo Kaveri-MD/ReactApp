@@ -24,14 +24,14 @@ function CreateModal(props) {
   // console.log(moment(input.date + '' +input.to,'YYYY-MM-DDTHH:mm:ss').format("YYYY-MM-DDTHH:mm:ss"))
   const addInput= (e)=>{
     console.log(input.title);
-    const creatItem = {
+    const createItem = {
       id: uuid(),
       eventName:input.title,
       fromTime:moment(input.date + '' +input.from,'YYYY-MM-DDTHH:mm:ss').format("YYYY-MM-DDTHH:mm:ss"),
       toTime: moment(input.date + '' +input.to,'YYYY-MM-DDTHH:mm:ss').format("YYYY-MM-DDTHH:mm:ss")
     }
     // e.preventDefault();
-    const post = axios.post("http://localhost:5169/appointments",creatItem)
+    axios.post("http://localhost:5169/appointments",createItem)
     // setData([...data,post.data])
     console.log(data,"data");
     props.toggleModal();
@@ -47,7 +47,7 @@ function CreateModal(props) {
     <div>
         <div className=""></div>
           <div className="modal-content" >
-            <div className="add">ADD EVENT</div>
+            <div className="add">NEW EVENT</div>
             <form onSubmit={addInput}>
             <div className="title">
               <div className='title-text'>Title</div>
