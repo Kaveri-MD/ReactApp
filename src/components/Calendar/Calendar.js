@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -14,17 +14,26 @@ import {
 import "../../styles/calendar.scss";
 import Cell from "./Cell";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
-import useCreateEvent from "../context/useCreateEvent";
+import axios from "axios";
 import Modal from "react-modal";
 import EventModal from "./EventModal";
 
-
 function Calendar() {
-  const { data, value, setCurrentDate, prevMonth, nextMonth, getId, setGetId } =
+  const { data,setData, value, setCurrentDate, prevMonth, nextMonth, getId, setGetId,select } =
     useContext(ReferenceDataContext);
 
     
-    // console.log(id);
+    useEffect(()=>{
+  
+      axios.get("http://localhost:5169/appointments").then((response) => {
+      // handle success
+      // console.log(response.data);
+      setData(response.data);
+    });
+    },[])
+    console.log(select,"cal")
+
+  // console.log(id);
   // const { input, setInput, data, setData } = props;
 
   // const value = props.value;
@@ -58,7 +67,7 @@ function Calendar() {
     setEvent(!event);
     // console.log(event);
   };
-  console.log(getId);
+  // console.log(select.fromTime);
   return (
     <div>
       {/* <div>Selected Date:{format(value,"dd LLLL yyyy")}</div> */}
@@ -91,7 +100,9 @@ function Calendar() {
           const date = index + 1;
           const isCurrentDate = date === value.getDate();
 
-          // console.log(value.getDate());
+          // select ? (isCurrentDate = select.fromTime.slice(8,10)) : 
+
+          console.log(value.getDate());
 
           return (
             <div className="calendar-item" onClick={() => selectedDate(date)}>
@@ -102,14 +113,21 @@ function Calendar() {
                 {data &&
                   data.map(
                     (item) =>
-                      item.fromTime.slice(0, 10) ===
+                      item.fromTime.slice(0,10) ===
                         format(setDate(value, date), "yyyy-MM-dd") && (
-                        <div className="display-event" onClick={()=>{eventClick(item.id)}} >
+                        <div
+                          className="display-event"
+                          onClick={() => {
+                            eventClick(item.id);
+                          }}
+                        >
                           {item.eventName}
                         </div>
                       )
                   )}
               </Cell>
+           
+              
             </div>
           );
         })}
@@ -118,11 +136,11 @@ function Calendar() {
             <Cell></Cell>
           </div>
         ))}
-            {event && (
-        <Modal isOpen={event} ariaHideApp={false} className="modal">
-          <EventModal eventClick={eventClick} getId={getId} />
-        </Modal>
-      )}
+        {event && (
+          <Modal isOpen={event} ariaHideApp={false} className="modal">
+            <EventModal eventClick={eventClick} getId={getId} />
+          </Modal>
+        )}
       </div>
     </div>
   );

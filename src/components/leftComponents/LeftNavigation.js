@@ -1,15 +1,15 @@
-import React, { useState ,useContext} from "react";
+import React, { useState, useContext } from "react";
 import Calendar from "../Calendar/Calendar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/leftNavigation.scss";
-import Modal from "react-modal"
-import Draggable from 'react-draggable';
+import Modal from "react-modal";
+import Draggable from "react-draggable";
 import CreateModal from "./CreateModal";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 
 function LeftNavigation() {
-  const {display,prevMonth,nextMonth} = useContext(ReferenceDataContext);
+  const { display, prevMonth, nextMonth } = useContext(ReferenceDataContext);
   // const prevMonth = props.prevMonth;
   // const nextMonth = props.nextMonth;
 
@@ -32,15 +32,12 @@ function LeftNavigation() {
         Create
       </button>
       <Calendar />
-      
-      
-      {modal && <Modal isOpen={modal} ariaHideApp={false} className="modal">
-      
-          <CreateModal toggleModal={toggleModal} />
-         
-      </Modal> }
-      
 
+      {modal && (
+        <Modal isOpen={modal} ariaHideApp={false} className="modal">
+          <CreateModal toggleModal={toggleModal} />
+        </Modal>
+      )}
 
       {/* {modal && (
         <div className="modal">

@@ -16,7 +16,7 @@ function DisplayTime() {
   // const [getId, setGetId] = useState();
   // const [event, setEvent] = useState(false);
   const [icon, setIcon] = useState(false);
-  console.log(icon);
+  // console.log(icon);
 
   // const eventClick = (id) => {
   //   setGetId(id);
@@ -41,7 +41,7 @@ function DisplayTime() {
           <div>{format(value, "d")}</div>
         </div>
 
-        <Link to="/" className="primary-button">
+        <Link to="/month" className="primary-button">
           Month
         </Link>
       </div>
@@ -131,20 +131,20 @@ function DisplayTime() {
                   <div className="event-notes">
                     <div className="title">
                       <div className="title-text">Event</div>
-                      <div>
-                        : {item.eventName}
-                      </div>
+                      <div>: {item.eventName}</div>
                     </div>
                     {/* <div>: </div> */}
                     <div className="from-time">
                       <div className="from-text">Time</div>
                       <div>
-                      :{" "}
-                      {from + item.fromTime.slice(13, 16) + " " + fromMeridiem}{" "}
-                      - {to + item.toTime.slice(13, 16) + " " + toMeridiem}
+                        :{" "}
+                        {from +
+                          item.fromTime.slice(13, 16) +
+                          " " +
+                          fromMeridiem}{" "}
+                        - {to + item.toTime.slice(13, 16) + " " + toMeridiem}
+                      </div>
                     </div>
-                    </div>
-                    
                   </div>
                 )
               );

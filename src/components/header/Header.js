@@ -1,30 +1,31 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import "../../styles/header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faAngleLeft,
   faAngleRight,
-  
 } from "@fortawesome/free-solid-svg-icons";
 import { format } from "date-fns";
-import {ReferenceDataContext} from "../context/ReferenceDataContext"
+import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import SearchEvent from "./SearchEvent";
+import axios from "axios";
 // import { Routes, Route } from "react-router-dom";
 
 function Header() {
-
   // const onChange = props.onChange;
   // const value = props.value;
   // const prevMonth = props.prevMonth;
   // const nextMonth = props.nextMonth;
-  const { view,value,setCurrentDate,prevMonth,nextMonth} = useContext(ReferenceDataContext);
+  const { view, value, setCurrentDate, prevMonth, nextMonth } =
+    useContext(ReferenceDataContext);
   function iconClick() {
     view();
   }
   function handleSetToday() {
     setCurrentDate(new Date());
   }
+  // console.log("hi")
   return (
     <div className="header">
       <div className="left-side">
@@ -45,7 +46,7 @@ function Header() {
       </div>
 
       <div className="right-side">
-        <SearchEvent/>
+        <SearchEvent />
         <div className="year">{format(value, "yyyy")}</div>
       </div>
     </div>

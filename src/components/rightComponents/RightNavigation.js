@@ -1,4 +1,4 @@
-import React ,{useContext}from "react";
+import React, { useContext } from "react";
 import "../../styles/rightNavigation.scss";
 import DisplayTime from "./DisplayTime";
 
@@ -6,33 +6,22 @@ import { Routes, Route } from "react-router-dom";
 import MainCalendar from "./MainCalendar";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 function RightNavigation() {
-  const { display,view,value,setCurrentDate,prevMonth,nextMonth} = useContext(ReferenceDataContext);
+  const { display, view, value, setCurrentDate, prevMonth, nextMonth } =
+    useContext(ReferenceDataContext);
   // const display = props.display;
   // const value = props.value;
   // const setCurrentDate = props.onChange;
   // const prevMonth = props.prevMonth;
   // const nextMonth = props.nextMonth;
 
-
   return (
-    
-        <div className={display ? "right-navigation" : "right-iconclick"}>
-          
-            <Routes>
-            <Route
-        path="/"
-        element={
-          <MainCalendar />
-        }
-      />
+    <div className={display ? "right-navigation" : "right-iconclick"}>
+      <Routes>
+        <Route path="/month" element={<MainCalendar />} />
 
-        <Route path="/day" element={<DisplayTime  />} />
-          
-       
-     
-            </Routes>
-      
-      </div>
+        <Route path="/" element={<DisplayTime />} />
+      </Routes>
+    </div>
     // <div className={props.display ? "right-navigation" : "right-iconclick"}>
     //   <div className="main-calendar">
     //     <div className="display-month">

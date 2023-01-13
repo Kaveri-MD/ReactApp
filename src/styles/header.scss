@@ -53,6 +53,7 @@
     border-radius: 15px;
     padding: 5px;
     background-color: white;
+    width: 210px;
 
 }
 .search-icon{
@@ -93,4 +94,23 @@
     font-size: 20px;
     font-weight: bold;
     width: 100px;
+}
+.suggestion{
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    width: 180px;
+}
+.suggestion:hover{
+    background-color: #f2f2f2;
+}
+.suggestion-container
+{ 
+    height: 30px;
+}
+.suggestion-box{
+    border: 1px solid;
+    // height: 180px;
+    max-height: 180px;
+    background-color: white;
 }
