@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 function MainCalendar() {
   const {
-    value,
+    currentDate,
     setCurrentDate,
     prevMonth,
     nextMonth,
@@ -24,7 +24,7 @@ function MainCalendar() {
     <div className="month">
       <div className="main-calendar">
         <div className="display-month">
-          <div className="text">{format(value, "dd LLLL yyyy")}</div>
+          <div className="text">{format(currentDate, "dd LLLL yyyy")}</div>
           <Link to="/" className="primary-button">
             Day
           </Link>

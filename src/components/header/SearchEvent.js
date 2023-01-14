@@ -3,11 +3,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
+import moment from "moment";
+import { formatISO, parse, parseISO, setDate } from "date-fns";
 
 function SearchEvent() {
-  const { value, data, getId, setGetId, select, setSelect,setCurrentDate} =
-    useContext(ReferenceDataContext);
-  // const [select, setSelect] = useState("");
+  const {
+    currentDate,
+    data,
+    getId,
+    setGetId,
+    select,
+    setSelect,
+    setCurrentDate,
+  } = useContext(ReferenceDataContext);
+  const [error, setError] = useState(true);
   const [search, setSearch] = useState("");
 
   const [filterData, setFilterData] = useState([]);
@@ -38,15 +47,14 @@ function SearchEvent() {
 
   // // console.log(axios.get("http://localhost:5169/appointments/event?Event=meet"))
 
-  const handleFilter =(e)=>{
+  const handleFilter = (e) => {
     // setSearch(e.target.search)
     const searchWord = e.target.value;
-    setSearch(searchWord)
-    const filter = data.filter((item)=>{
-    return item.eventName.toLowerCase().includes(searchWord.toLowerCase())
-      
+    setSearch(searchWord);
+    const filter = data.filter((item) => {
+      return item.eventName.toLowerCase().includes(searchWord.toLowerCase());
     });
-    (searchWord === "") ? setFilterData([]) : setFilterData(filter);
+    searchWord === "" ? setFilterData([]) : setFilterData(filter);
 
     // if(searchWord === ""){
     //   setFilterData([]);
@@ -56,22 +64,34 @@ function SearchEvent() {
 
     // }
     // console.log(searchWord)
-  }
-  const getEvent = (event) => {
-    // const searchWord= event;
-    setFilterData([])
-    setSearch(event)
-    axios
-    .get(`http://localhost:5169/appointments/event?Event=${event}`)
-    .then((response)=>{
-      setSelect(response.data);
-    })
-    setCurrentDate(select.fromTime.slice(0,10))
   };
-  console.log(select.fromTime)
+  const getEvent = async (event) => {
+    // const searchWord= event;
+    setError(false);
+    setFilterData([]);
+    setSearch(event);
+    const response = await axios.get(
+      `http://localhost:5169/appointments/event?Event=${event}`
+    );
+    setSelect(response.data);
+
+    // .then (()=>{
+
+    // await setCurrentDate(parseISO(select.fromTime))
+    // const date = setDate(currentDate,select.fromTime);
+    // setCurrentDate(date);
+
+    // )
+  };
+  const wordEntered = () => {
+    // select &&(
+    //   )
+  };
+  // console.log(select,"search")
+  console.log(parseISO(select.fromTime, "date"));
   return (
     <div className="suggestion-container">
-      <form className="search-box" >
+      <form className="search-box">
         <FontAwesomeIcon className="search-icon" icon={faMagnifyingGlass} />
         <input
           className="text-area"
@@ -82,15 +102,22 @@ function SearchEvent() {
         ></input>
         {/* {console.log(search)} */}
       </form>
-      {
-        (filterData.length !== 0) &&(
-      <div className="suggestion-box">
-        {filterData.map((item) => (
-            <div className="suggestion" onClick={()=>getEvent(item.eventName)}>{item.eventName}</div>
+      {(filterData.length === 0 && search.length !== 0 && error === true) ? (
+        <div className="suggestion-box">
+          <div className="suggestion">No event found</div>
+        </div>
+      ) : (
+        <div className="suggestion-box">
+          {filterData.map((item) => (
+            <div
+              className="suggestion"
+              onClick={() => getEvent(item.eventName)}
+            >
+              {item.eventName}
+            </div>
           ))}
-      </div>
-        )
-      }
+        </div>
+      )}
     </div>
   );
 }

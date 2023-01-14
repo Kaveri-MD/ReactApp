@@ -12,7 +12,7 @@ import EllipsisMenu from "./EllipsisMenu";
 import DeleteModal from "./DeleteModal";
 
 function DisplayTime() {
-  const { value, data, getId, setGetId } = useContext(ReferenceDataContext);
+  const { currentDate, data, getId, setGetId } = useContext(ReferenceDataContext);
   // const [getId, setGetId] = useState();
   // const [event, setEvent] = useState(false);
   const [icon, setIcon] = useState(false);
@@ -37,8 +37,8 @@ function DisplayTime() {
     <div>
       <div className="display-day">
         <div className="day">
-          <div>{format(value, "EEEE")}</div>
-          <div>{format(value, "d")}</div>
+          <div>{format(currentDate, "EEEE")}</div>
+          <div>{format(currentDate, "d")}</div>
         </div>
 
         <Link to="/month" className="primary-button">
@@ -81,7 +81,7 @@ function DisplayTime() {
               // console.log(setTop - 100, "top");
 
               return (
-                item.fromTime.slice(0, 10) === format(value, "yyyy-MM-dd") && (
+                item.fromTime.slice(0, 10) === format(currentDate, "yyyy-MM-dd") && (
                   <div
                     className="display-eventbar"
                     style={{ height: setHeight, top: setTop }}
@@ -127,7 +127,7 @@ function DisplayTime() {
                 item.fromTime.slice(11, 13) < 12 ? "am" : "pm";
               const toMeridiem = item.toTime.slice(11, 13) < 12 ? "am" : "pm";
               return (
-                item.fromTime.slice(0, 10) === format(value, "yyyy-MM-dd") && (
+                item.fromTime.slice(0, 10) === format(currentDate, "yyyy-MM-dd") && (
                   <div className="event-notes">
                     <div className="title">
                       <div className="title-text">Event</div>

@@ -19,7 +19,7 @@ import Modal from "react-modal";
 import EventModal from "./EventModal";
 
 function Calendar() {
-  const { data,setData, value, setCurrentDate, prevMonth, nextMonth, getId, setGetId,select } =
+  const { data,setData, currentDate, setCurrentDate, prevMonth, nextMonth, getId, setGetId,select } =
     useContext(ReferenceDataContext);
 
     
@@ -30,8 +30,8 @@ function Calendar() {
       // console.log(response.data);
       setData(response.data);
     });
-    },[])
-    console.log(select,"cal")
+    },[setData])
+    // console.log(select,"cal")
 
   // console.log(id);
   // const { input, setInput, data, setData } = props;
@@ -42,22 +42,24 @@ function Calendar() {
   // const nextMonth = props.nextMonth;
 
   const weeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const startDate = startOfMonth(value);
-  const endDate = endOfMonth(value);
+  const startDate = startOfMonth(currentDate);
+  const endDate = endOfMonth(currentDate);
   const numDays = differenceInDays(endDate, startDate) + 1;
 
   const prefixDate = startDate.getDay();
-  const suffixDate = 6 - endDate.getDay();
+  const suffixDate = 6- endDate.getDay();
 
+  // console.log( endDate.getDay())
   // const prevMonth=() =>{
-  //   onChange(sub(value,{months:1}));
+  //   onChange(sub(currentDate,{months:1}));
   // }
   // const nextMonth=() =>{
-  //   onChange(add(value,{months:1}));
+  //   onChange(add(currentDate,{months:1}));
   // }
   const selectedDate = (index) => {
-    const date = setDate(value, index);
+    const date = setDate(currentDate, index);
     setCurrentDate(date);
+    console.log(currentDate,"date")
   };
   // const [getId, setGetId] = useState();
   const [event, setEvent] = useState(false);
@@ -70,7 +72,7 @@ function Calendar() {
   // console.log(select.fromTime);
   return (
     <div>
-      {/* <div>Selected Date:{format(value,"dd LLLL yyyy")}</div> */}
+      {/* <div>Selected Date:{format(currentDate,"dd LLLL yyyy")}</div> */}
       <div className="calendar-container">
         <div className="calendar-angle" onClick={() => prevMonth()}>
           <Cell>
@@ -78,7 +80,7 @@ function Calendar() {
           </Cell>
         </div>
         <div className="calendar-month">
-          <Cell>{format(value, "LLLL yyyy")}</Cell>
+          <Cell>{format(currentDate, "LLLL yyyy")}</Cell>
         </div>
         <div className="calendar-angle" onClick={() => nextMonth()}>
           <Cell>
@@ -98,11 +100,11 @@ function Calendar() {
 
         {Array.from({ length: numDays }).map((_, index) => {
           const date = index + 1;
-          const isCurrentDate = date === value.getDate();
+          const isCurrentDate = date === currentDate.getDate();
 
           // select ? (isCurrentDate = select.fromTime.slice(8,10)) : 
 
-          console.log(value.getDate());
+          console.log(currentDate,"currentDate");
 
           return (
             <div className="calendar-item" onClick={() => selectedDate(date)}>
@@ -114,7 +116,7 @@ function Calendar() {
                   data.map(
                     (item) =>
                       item.fromTime.slice(0,10) ===
-                        format(setDate(value, date), "yyyy-MM-dd") && (
+                        format(setDate(currentDate, date), "yyyy-MM-dd") && (
                         <div
                           className="display-event"
                           onClick={() => {

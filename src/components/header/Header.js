@@ -17,7 +17,7 @@ function Header() {
   // const value = props.value;
   // const prevMonth = props.prevMonth;
   // const nextMonth = props.nextMonth;
-  const { view, value, setCurrentDate, prevMonth, nextMonth } =
+  const { view, currentDate, setCurrentDate, prevMonth, nextMonth } =
     useContext(ReferenceDataContext);
   function iconClick() {
     view();
@@ -39,7 +39,7 @@ function Header() {
         <div className="calendar-angle" onClick={() => prevMonth()}>
           <FontAwesomeIcon icon={faAngleLeft} />
         </div>
-        <div className="calendar-month">{format(value, "LLLL")}</div>
+        <div className="calendar-month">{format(currentDate, "LLLL")}</div>
         <div className="calendar-angle" onClick={() => nextMonth()}>
           <FontAwesomeIcon icon={faAngleRight} />
         </div>
@@ -47,7 +47,7 @@ function Header() {
 
       <div className="right-side">
         <SearchEvent />
-        <div className="year">{format(value, "yyyy")}</div>
+        <div className="year">{format(currentDate, "yyyy")}</div>
       </div>
     </div>
   );

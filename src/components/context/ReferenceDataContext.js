@@ -36,14 +36,14 @@ const ReferenceDataContextProvider = ({ children }) => {
   const view = () => {
     setDisplay(!display);
   };
-  const value = currentDate;
+  // const value = currentDate;
   // const onChange = setCurrentDate;
   // console.log(setCurrentDate);
   const prevMonth = () => {
-    setCurrentDate(sub(value, { months: 1 }));
+    setCurrentDate(sub(currentDate , { months: 1 }));
   };
   const nextMonth = () => {
-    setCurrentDate(add(value, { months: 1 }));
+    setCurrentDate(add(currentDate , { months: 1 }));
   };
 
   // const toggleModal = () => {
@@ -60,7 +60,7 @@ const ReferenceDataContextProvider = ({ children }) => {
   return (
     <ReferenceDataContext.Provider
       value={{
-        value,
+        currentDate,
         setCurrentDate,
         prevMonth,
         nextMonth,
