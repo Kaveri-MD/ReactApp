@@ -19,7 +19,7 @@ import Modal from "react-modal";
 import EventModal from "./EventModal";
 
 function Calendar() {
-  const { data,setData, currentDate, setCurrentDate, prevMonth, nextMonth, getId, setGetId,select } =
+  const { data,setData, currentDate, setCurrentDate, prevMonth, nextMonth, getId, setGetId,select,day } =
     useContext(ReferenceDataContext);
 
     
@@ -69,12 +69,18 @@ function Calendar() {
     setEvent(!event);
     // console.log(event);
   };
+  // const prevDate =()=>{
+  //   setCurrentDate(currentDate.getDate()-1);
+  // }
+  // const nextDate =()=>{
+  //   setCurrentDate(currentDate.getDate()+1);
+  // }
   // console.log(select.fromTime);
   return (
     <div>
       {/* <div>Selected Date:{format(currentDate,"dd LLLL yyyy")}</div> */}
       <div className="calendar-container">
-        <div className="calendar-angle" onClick={() => prevMonth()}>
+        <div className="calendar-angle" onClick={()=> prevMonth()}>
           <Cell>
             <FontAwesomeIcon icon={faAngleLeft} />
           </Cell>
@@ -104,7 +110,7 @@ function Calendar() {
 
           // select ? (isCurrentDate = select.fromTime.slice(8,10)) : 
 
-          console.log(currentDate,"currentDate");
+          // console.log(currentDate,"currentDate");
 
           return (
             <div className="calendar-item" onClick={() => selectedDate(date)}>

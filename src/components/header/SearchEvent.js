@@ -4,7 +4,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import moment from "moment";
-import { formatISO, parse, parseISO, setDate } from "date-fns";
+import { formatISO, getMonth, parse, parseISO, set, setDate,format } from "date-fns";
 
 function SearchEvent() {
   const {
@@ -73,22 +73,33 @@ function SearchEvent() {
     const response = await axios.get(
       `http://localhost:5169/appointments/event?Event=${event}`
     );
-    setSelect(response.data);
-
+    // setSelect(response.data);
+    console.log(response.data.fromTime)
+    
+    wordEntered(response.data.fromTime);
+    // setCurrentDate(parseISO(select.fromTime));
+    
     // .then (()=>{
-
-    // await setCurrentDate(parseISO(select.fromTime))
-    // const date = setDate(currentDate,select.fromTime);
-    // setCurrentDate(date);
-
-    // )
-  };
-  const wordEntered = () => {
+      
+      
+      // const date = setDate(currentDate,select.fromTime);
+      // setCurrentDate(date);
+      
+      // )
+    };
+    // console.log(format(select.fromTime,"yyyy-mm-dd"))
+  const wordEntered = (date) => {
     // select &&(
     //   )
+    console.log(date,"date")
+    setCurrentDate(parseISO(date))
+    // setSearch("")
+    // console.log(select.fromTime,"hi")
   };
-  // console.log(select,"search")
-  console.log(parseISO(select.fromTime, "date"));
+  // console.log(select.fromTime,"bye")
+  // setCurrentDate(parseISO(select.fromTime));
+  // const d = parseISO(select.fromTime);
+  // console.log(set(new Date(),parseISO(select.fromTime)),"date");
   return (
     <div className="suggestion-container">
       <form className="search-box">

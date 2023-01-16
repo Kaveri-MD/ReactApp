@@ -27,11 +27,6 @@ function App() {
         <LeftNavigation />
         <RightNavigation />
       </div>
-      {/* <Header view = {view} onChange = {onChange} value = {value} prevMonth ={prevMonth} nextMonth = {nextMonth}/>
-      <div className="features">
-        <LeftNavigation display= {display} value = {value} onChange = {onChange} prevMonth ={prevMonth} nextMonth = {nextMonth} input={input} setInput={setInput} data={data} setData={setData}/>
-        <RightNavigation display= {display} value = {value} onChange = {onChange} prevMonth ={prevMonth} nextMonth = {nextMonth} input={input} setInput={setInput} data={data} setData={setData}/>
-      </div> */}
       </ReferenceDataContextProvider>
     </div>
   );

@@ -23,13 +23,6 @@ function MainCalendar() {
   return (
     <div className="month">
       <div className="main-calendar">
-        <div className="display-month">
-          <div className="text">{format(currentDate, "dd LLLL yyyy")}</div>
-          <Link to="/" className="primary-button">
-            Day
-          </Link>
-        </div>
-
         <Calendar />
       </div>
     </div>
