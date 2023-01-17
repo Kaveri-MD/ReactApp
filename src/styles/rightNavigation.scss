@@ -8,7 +8,8 @@
     top:80px;
     z-index: -1;
     // border-radius: 25px;
-    
+    overflow-x: hidden;
+    overflow-y: hidden;
     
     // left:380px;
     // overflow-x: hidden;
@@ -144,10 +145,22 @@
     text-align: center;
     box-shadow: 2px 2px 2px #ede7fe;
     color: #100333;
+    // border: 1px solid black;
     // box-sizing: border-box;
     // height: 100%;
     // border-radius: 25px;
+    max-height: 100px;
+    overflow-y:auto ;
 }
+.main-calendar .calendar-item::-webkit-scrollbar {
+    width: 6px;
+  }
+  .main-calendar .calendar-item::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  .main-calendar .calendar-item::-webkit-scrollbar-thumb {
+    background: #100333; 
+  }
 .main-calendar .calendar-item:hover{
     background-color: #ede7fe;
 }
@@ -161,6 +174,14 @@
     width: 25%;
     height: 35%;
     border-radius: 100%;
+}
+.main-calendar  .display-date{
+    // position: fixed;
+    // display: inline;
+    // text-align: center;
+    // padding-bottom:100px ;
+    // bottom: 10;
+    // height: 10px;
 }
 .main-calendar .display-event{
     display: block;
@@ -331,4 +352,37 @@
 }
 .chart{
     width: 77%;
+}
+.error-container{
+    position: absolute;
+    z-index: 1;
+    right: 0px;
+    bottom: 0;
+    box-shadow: 1px 2px 5px 5px #ff3333;
+    margin: 26px;
+    width: 25%;
+    height: 20%;
+    background-color: #ffe6e6;
+    border-radius: 8px;
+    // text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: move 2s;
+    
+}
+@keyframes move {
+    from {right: -500px;}
+    to {right: 0px;}
+  }
+.error-message{
+    // font-size: 20px;
+    font-weight:bold ;
+}
+.x-mark{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+    margin: 20px;
 }

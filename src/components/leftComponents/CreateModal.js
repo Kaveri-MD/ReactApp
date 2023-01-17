@@ -18,10 +18,11 @@ function CreateModal(props) {
   // useEffect(()=>{
   //   addInput()
   // },[])
-  const { input, setInput, data, setData } = useContext(ReferenceDataContext);
+  const { input, setInput, data, setData,error,setError } = useContext(ReferenceDataContext);
+  
   // const {input,setInput,data,setData} = props
   // console.log(moment(input.date + '' +input.to,'YYYY-MM-DDTHH:mm:ss').format("YYYY-MM-DDTHH:mm:ss"))
-  const addInput = (e) => {
+  const addInput = async (e) => {
     console.log(input.title);
     const createItem = {
       id: uuid(),
@@ -35,9 +36,17 @@ function CreateModal(props) {
       ),
     };
     // e.preventDefault();
-    axios.post("http://localhost:5169/appointments", createItem);
+     await axios.post("http://localhost:5169/appointments", createItem)
+     .catch((error)=>{
+      setError(error.response.data);
+     })
+
+    
+     
+
+    
     // setData([...data,post.data])
-    console.log(data, "data");
+    
     props.toggleModal();
     setInput("");
     // setData([input,...data]);
@@ -51,7 +60,6 @@ function CreateModal(props) {
   }
   return (
     <div>
-      <div className=""></div>
       <div className="modal-content">
         <div className="add">NEW EVENT</div>
         <form onSubmit={addInput}>

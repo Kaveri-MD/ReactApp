@@ -5,17 +5,35 @@ import DisplayTime from "./DisplayTime";
 import { Routes, Route } from "react-router-dom";
 import MainCalendar from "./MainCalendar";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 function RightNavigation() {
-  const { display, view, value, setCurrentDate, prevMonth, nextMonth } =
+  const { display, view, value, setCurrentDate, prevMonth, nextMonth,error,setError,errorPopUp,setErrorPopUp } =
     useContext(ReferenceDataContext);
   // const display = props.display;
   // const value = props.value;
   // const setCurrentDate = props.onChange;
   // const prevMonth = props.prevMonth;
   // const nextMonth = props.nextMonth;
-
+  console.log(error)
+  const handleXmark=()=>{
+    setErrorPopUp(false)
+    setError("")
+  }
   return (
     <div className={display ? "right-navigation" : "right-iconclick"}>
+      {
+         (error && errorPopUp) &&( 
+
+      <div className="error-container">
+        <FontAwesomeIcon className="x-mark" icon={faXmark} onClick={handleXmark}/>
+        <div className="error-message">
+        {error}
+        </div>
+        </div>
+        ) 
+       } 
+
       <Routes>
         <Route path="/month" element={<MainCalendar />} />
 

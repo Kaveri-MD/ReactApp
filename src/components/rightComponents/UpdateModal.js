@@ -5,7 +5,7 @@ import { ReferenceDataContext } from "../context/ReferenceDataContext";
 
 function UpdateModal(props) {
   // const { input,setInput,data,setData} = useContext(ReferenceDataContext);
-  const { Update, filteredEvent, setIcon, update, setUpdate } = props;
+  const { Update, filteredEvent, setIcon, update, setUpdate ,setError} = props;
   const [edit, setEdit] = useState({
     title: filteredEvent[0].eventName,
     date: filteredEvent[0].fromTime.slice(0, 10),
@@ -13,7 +13,7 @@ function UpdateModal(props) {
     to: filteredEvent[0].toTime.slice(11, 16),
   });
   console.log(edit);
-  const UpdateItem = () => {
+  const UpdateItem = async() => {
     const editItem = {
       id: filteredEvent[0].id,
       eventName: edit.title,
@@ -26,7 +26,10 @@ function UpdateModal(props) {
       ),
     };
 
-    axios.put(`http://localhost:5169/appointments`, editItem);
+    await axios.put(`http://localhost:5169/appointments`, editItem)
+    .catch((error)=>{
+     setError(error.response.data)
+     })
 
     setIcon(false);
     setUpdate(!update);

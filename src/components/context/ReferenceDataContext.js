@@ -30,6 +30,8 @@ const ReferenceDataContextProvider = ({ children }) => {
   const [getId, setGetId] = useState();
   const [select, setSelect] = useState([]);
   const [day,setDay]=useState(false);
+  const [error,setError]=useState("");
+  const[errorPopUp,setErrorPopUp]=useState(true)
   // const [modal, setModal] = useState(false);
 
   // const [getData,setGetData] =useState([]);
@@ -74,7 +76,7 @@ const ReferenceDataContextProvider = ({ children }) => {
         getId,
         setGetId,
         select, 
-        setSelect,day,setDay
+        setSelect,day,setDay,error,setError,errorPopUp,setErrorPopUp
       }}
     >
       {children}

@@ -143,7 +143,7 @@ function DisplayTime() {
               )
             );
           })}
-        <div className="event-notes">No event today</div>
+        {/* <div className="event-notes">No event today</div> */}
       </div>
     </div>
   );
