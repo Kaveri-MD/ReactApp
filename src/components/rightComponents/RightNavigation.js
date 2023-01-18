@@ -18,7 +18,7 @@ function RightNavigation() {
   console.log(error)
   const handleXmark=()=>{
     setErrorPopUp(false)
-    setError("")
+    // setError("")
   }
   return (
     <div className={display ? "right-navigation" : "right-iconclick"}>

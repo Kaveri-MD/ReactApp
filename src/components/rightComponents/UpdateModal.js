@@ -4,8 +4,8 @@ import axios from "axios";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 
 function UpdateModal(props) {
-  // const { input,setInput,data,setData} = useContext(ReferenceDataContext);
-  const { Update, filteredEvent, setIcon, update, setUpdate ,setError} = props;
+  const { setError} = useContext(ReferenceDataContext);
+  const { Update, filteredEvent, setIcon, update, setUpdate ,} = props;
   const [edit, setEdit] = useState({
     title: filteredEvent[0].eventName,
     date: filteredEvent[0].fromTime.slice(0, 10),
@@ -28,7 +28,9 @@ function UpdateModal(props) {
 
     await axios.put(`http://localhost:5169/appointments`, editItem)
     .catch((error)=>{
+      // console.log(error.response.data);
      setError(error.response.data)
+     
      })
 
     setIcon(false);
