@@ -5,6 +5,7 @@ import axios from "axios";
 import moment from "moment";
 import { faUserInjured } from "@fortawesome/free-solid-svg-icons";
 import uuid from "react-uuid";
+import { parseISO } from "date-fns";
 
 function CreateModal(props) {
   // const[input,setInput,data,setData] = useCreateEvent();
@@ -35,11 +36,19 @@ function CreateModal(props) {
         "YYYY-MM-DDTHH:mm:ss"
       ),
     };
+    if (parseISO(createItem.fromTime) < new Date())
+    {
+      setError("Meeting does not allowed for past");
+      props.toggleModal();
+    }
     // e.preventDefault();
-     await axios.post("http://localhost:5169/appointments", createItem)
-     .catch((error)=>{
-      setError(error.response.data);
-     })
+    else{
+
+      await axios.post("http://localhost:5169/appointments", createItem)
+      .catch((error)=>{
+       setError(error.response.data);
+      })
+    }
 
     
      

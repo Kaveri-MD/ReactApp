@@ -358,31 +358,36 @@
     z-index: 1;
     right: 0px;
     bottom: 0;
-    box-shadow: 1px 2px 5px 5px #ff3333;
+    // box-shadow: 1px 2px 5px 5px #ff3333;
+    border: 2px solid #fb9e00;
     margin: 26px;
     width: 25%;
-    height: 20%;
-    background-color: #ffe6e6;
+    height: 10%;
+    background-color:  #ffda99;
     border-radius: 8px;
     // text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     animation: move 1s;
+    // animation-duration: 10s;
     
 }
 @keyframes move {
     from {right: -500px;}
     to {right: 0px;}
   }
-.error-message{
+.warning{
     // font-size: 20px;
     font-weight:bold ;
+}
+.warning-icon{
+    color: #cc0000;
 }
 .x-mark{
     position: absolute;
     top: 0;
     right: 0;
-    color: red;
-    margin: 20px;
+    color: #cc0000;
+    margin: 10px;
 }

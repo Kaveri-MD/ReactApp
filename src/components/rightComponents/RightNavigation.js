@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import MainCalendar from "./MainCalendar";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faTriangleExclamation ,faXmark} from "@fortawesome/free-solid-svg-icons";
 function RightNavigation() {
   const { display, view, value, setCurrentDate, prevMonth, nextMonth,error,setError,errorPopUp,setErrorPopUp } =
     useContext(ReferenceDataContext);
@@ -23,13 +23,16 @@ function RightNavigation() {
   return (
     <div className={display ? "right-navigation" : "right-iconclick"}>
       {
-         (error && errorPopUp) &&( 
+         (error  && errorPopUp) &&( 
 
       <div className="error-container">
         <FontAwesomeIcon className="x-mark" icon={faXmark} onClick={handleXmark}/>
         <div className="error-message">
-        {error}
-        </div>
+        <div className="warning"><FontAwesomeIcon icon={faTriangleExclamation} className="warning-icon" />  Warning  </div>
+          
+          <div> {error}</div>
+          </div>
+        
         </div>
         ) 
        } 
