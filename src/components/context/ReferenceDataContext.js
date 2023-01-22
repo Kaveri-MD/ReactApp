@@ -18,20 +18,32 @@
 
 import { useState, createContext } from "react";
 import { sub, add } from "date-fns";
-import axios from "axios";
+// import axios from "axios";
 
 const ReferenceDataContext = createContext();
 
 const ReferenceDataContextProvider = ({ children }) => {
-  const [display, setDisplay] = useState(true);
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [input, setInput] = useState({ title: "", date: "", from: "", to: "" });
   const [data, setData] = useState([]);
   const [getId, setGetId] = useState();
+  // console.log(getId)
+  // console.log( filteredEvent )
+  // console.log(filteredEvent.eventName,"get");
+
+  const [display, setDisplay] = useState(true);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  // const [input, setInput] = useState();
+  // const [input ,setInput]=useState({
+  //   title: filteredEvent.eventName,
+  //   date: "",
+  //   from:"",
+  //   to: "",
+  // })
   const [select, setSelect] = useState([]);
   const [day,setDay]=useState(false);
   const [error,setError]=useState("");
   const[errorPopUp,setErrorPopUp]=useState(true)
+  const [modal, setModal] = useState(false);
+
   // const [modal, setModal] = useState(false);
 
   // const [getData,setGetData] =useState([]);
@@ -48,6 +60,10 @@ const ReferenceDataContextProvider = ({ children }) => {
   const nextMonth = () => {
     setCurrentDate(add(currentDate , { months: 1 }));
   };
+  // const Update = () => {
+  //   setIcon(false);
+  //   setUpdate(!update);
+  // };
 
   // const toggleModal = () => {
   //   setModal(!modal);
@@ -67,8 +83,6 @@ const ReferenceDataContextProvider = ({ children }) => {
         setCurrentDate,
         prevMonth,
         nextMonth,
-        input,
-        setInput,
         data,
         setData,
         display,
@@ -76,7 +90,7 @@ const ReferenceDataContextProvider = ({ children }) => {
         getId,
         setGetId,
         select, 
-        setSelect,day,setDay,error,setError,errorPopUp,setErrorPopUp
+        setSelect,day,setDay,error,setError,errorPopUp,setErrorPopUp,modal, setModal
       }}
     >
       {children}

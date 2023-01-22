@@ -5,6 +5,7 @@ import axios from "axios";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import moment from "moment";
 import { formatISO, getMonth, parse, parseISO, set, setDate,format } from "date-fns";
+import { ServicesContext } from "../Axios/ServicesContext";
 
 function SearchEvent() {
   const {
@@ -16,6 +17,7 @@ function SearchEvent() {
     setSelect,
     setCurrentDate,
   } = useContext(ReferenceDataContext);
+  // const {getByName} = useContext(ServicesContext);
   const [error, setError] = useState(true);
   const [search, setSearch] = useState("");
 
@@ -65,18 +67,19 @@ function SearchEvent() {
     // }
     // console.log(searchWord)
   };
-  const getEvent = async (event) => {
+  const getEvent =  async(event) => {
     // const searchWord= event;
     setError(false);
     setFilterData([]);
     setSearch(event);
+    // getByName(event);
     const response = await axios.get(
       `http://localhost:5169/appointments/event?Event=${event}`
     );
     // setSelect(response.data);
-    console.log(response.data.fromTime)
+    // console.log(response.data.fromTime)
     
-    wordEntered(response.data.fromTime);
+    setCurrentDate(parseISO(response.data.fromTime))
     // setCurrentDate(parseISO(select.fromTime));
     
     // .then (()=>{
@@ -92,7 +95,7 @@ function SearchEvent() {
     // select &&(
     //   )
     console.log(date,"date")
-    setCurrentDate(parseISO(date))
+    
     // setSearch("")
     // console.log(select.fromTime,"hi")
   };

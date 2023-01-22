@@ -1,22 +1,30 @@
 import React, { useContext, useState } from "react";
 import { ListItem } from "../../lists/List";
-import { format, set, setDate } from "date-fns";
+import { format, set, setDate, subDays, addDays } from "date-fns";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import Modal from "react-modal";
 import EventModal from "../Calendar/EventModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEllipsisVertical,
+  faAngleLeft,
+  faAngleRight,
+} from "@fortawesome/free-solid-svg-icons";
 import EllipsisMenu from "./EllipsisMenu";
 import DeleteModal from "./DeleteModal";
+import { RightNavContext } from "../context/RightNavContext";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {  } from "@fortawesome/free-solid-svg-icons";
 
 function DisplayTime() {
-  const { currentDate, data, getId, setGetId } =
+  const { currentDate, setCurrentDate, data, getId, setGetId } =
     useContext(ReferenceDataContext);
+    const {icon, setIcon,update, setUpdate } = useContext(RightNavContext)
   // const [getId, setGetId] = useState();
   // const [event, setEvent] = useState(false);
-  const [icon, setIcon] = useState(false);
+  // const [icon, setIcon] = useState(false);
   // console.log(icon);
 
   // const eventClick = (id) => {
@@ -33,13 +41,35 @@ function DisplayTime() {
     return item.id === getId;
   });
 
+  const prevDay = () => {
+    setCurrentDate(subDays(currentDate, 1));
+  };
+  const nextDay = () => {
+    setCurrentDate(addDays(currentDate, 1));
+  };
+
   // const { value, data } = props;
   return (
     <div className="display-time">
       <div className="time-chart">
         <div className="day">
-          <div>{format(currentDate, "EEEE")}</div>
-          <div>{format(currentDate, "d")}</div>
+          <div className="day-angle">
+            <div className="day-date">
+              <div>{format(currentDate, "EEEE")}</div>
+              <div>{format(currentDate, "d")}</div>
+            </div>
+            <div>
+              <FontAwesomeIcon
+                icon={faAngleLeft}
+                onClick={prevDay}
+              />
+              <FontAwesomeIcon
+                icon={faAngleRight}
+                className="calendar-day"
+                onClick={nextDay}
+              />
+            </div>
+          </div>
         </div>
 
         <div className="grid-container">
@@ -73,7 +103,7 @@ function DisplayTime() {
               // console.log(hour + min.minutes());
               const setHeight = (minutes / 60) * 51;
               // console.log(setHeight, "height");
-              const setTop = 51 * startTime.hours() + startMinute;
+              const setTop = 50.8 * startTime.hours() + startMinute;
               // console.log(setTop - 100, "top");
 
               return (
@@ -85,7 +115,7 @@ function DisplayTime() {
                     // onClick={DotClick}
                   >
                     <div className="event-name">
-                      {item.eventName}{" "}
+                      {item.eventName}
                       <FontAwesomeIcon
                         className="dot-icon"
                         icon={faEllipsisVertical}
@@ -96,9 +126,7 @@ function DisplayTime() {
                       {item.id === getId && (
                         <div className={icon ? "menu" : "menu-inactive"}>
                           <EllipsisMenu
-                            icon={icon}
-                            setIcon={setIcon}
-                            filteredEvent={filteredEvent}
+                            // filteredEvent={filteredEvent}
                           />
                         </div>
                       )}

@@ -28,9 +28,8 @@ function RightNavigation() {
       <div className="error-container">
         <FontAwesomeIcon className="x-mark" icon={faXmark} onClick={handleXmark}/>
         <div className="error-message">
-        <div className="warning"><FontAwesomeIcon icon={faTriangleExclamation} className="warning-icon" />  Warning  </div>
           
-          <div> {error}</div>
+          {error}
           </div>
         
         </div>

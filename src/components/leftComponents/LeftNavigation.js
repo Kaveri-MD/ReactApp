@@ -9,11 +9,11 @@ import CreateModal from "./CreateModal";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 
 function LeftNavigation() {
-  const { display, prevMonth, nextMonth } = useContext(ReferenceDataContext);
+  const { display, prevMonth, nextMonth,modal, setModal } = useContext(ReferenceDataContext);
   // const prevMonth = props.prevMonth;
   // const nextMonth = props.nextMonth;
 
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -35,7 +35,7 @@ function LeftNavigation() {
 
       {modal && (
         <Modal isOpen={modal} ariaHideApp={false} className="modal">
-          <CreateModal toggleModal={toggleModal} />
+          <CreateModal modal={modal} setModal={setModal}  />
         </Modal>
       )}
 

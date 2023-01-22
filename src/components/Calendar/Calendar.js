@@ -11,6 +11,7 @@ import {
 import "../../styles/calendar.scss";
 import Cell from "./Cell";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
+import { ServicesContext } from "../Axios/ServicesContext";
 import axios from "axios";
 import Modal from "react-modal";
 import EventModal from "./EventModal";
@@ -27,10 +28,13 @@ function Calendar() {
     setGetId,
   } = useContext(ReferenceDataContext);
 
+  const {getAll}=useContext(ServicesContext)
   useEffect(() => {
-    axios.get("http://localhost:5169/appointments").then((response) => {
-      setData(response.data);
-    });
+    //  axios.get("http://localhost:5169/appointments").then((response)=>{
+
+    //    setData(response.data);
+    //  })
+    getAll();
   }, []);
 
   const weeks = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -95,6 +99,7 @@ function Calendar() {
                     return (
                       item.fromTime.slice(0, 10) ===
                         format(setDate(currentDate, date), "yyyy-MM-dd") && (
+                      
                           // <div className="event-container">
                              <div
                           className="display-event"
@@ -102,6 +107,7 @@ function Calendar() {
                             eventClick(item.id);
                           }}
                         >
+                         {console.log(item.fromTime.slice(0, 10))}
                           {item.eventName}
                         </div>
 
