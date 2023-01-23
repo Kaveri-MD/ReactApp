@@ -22,7 +22,7 @@ function App() {
     <div className="App">
       <ReferenceDataContextProvider>
         <Header />
-        <div className="features">
+        <div className="features" >
           <ServicesContextProvider>
             <LeftNavigation />
             <RightNavContextProvider>

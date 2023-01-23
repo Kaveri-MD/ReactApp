@@ -1,5 +1,5 @@
 import React from "react";
-import "../../styles/calendar.scss";
+import "../../styles/calendar/calendar.scss";
 
 function Cell(props) {
   const isActive = props.isActive;

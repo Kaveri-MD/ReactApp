@@ -1,28 +1,15 @@
-import React, { useState, useContext } from "react";
-import moment from "moment";
+import React, { useContext } from "react";
 import Modal from "react-modal";
 import DeleteModal from "./DeleteModal";
-import CreateModal from "../leftComponents/CreateModal";
-import UpdateModal from "./UpdateModal";
-// import CreateModal from "./CreateModal";
-import { ReferenceDataContext } from "../context/ReferenceDataContext";
+
 import { RightNavContext } from "../context/RightNavContext";
+import "../../styles/rightNavigation/ellipsisMenu.scss"
 
 function EllipsisMenu(props) {
-  const {modal,setModal, toggleModal  } = useContext(ReferenceDataContext);
-  const {icon, setIcon,update, setUpdate,popup, setPopup ,Delete} = useContext(RightNavContext)
-  // const [popup, setPopup] = useState(false);
-  // const [update, setUpdate] = useState(false);
-  // const { filteredEvent } = props;
-  // const Delete = () => {
-  //   setIcon(false);
-  //   setPopup(!popup);
-  // };
-  const Update = () => {
-    setIcon(false);
-    // setUpdate(!update);
-    setModal(true);
-  };
+ 
+  const { popup, Delete, Update} = useContext(RightNavContext);
+
+
   return (
     <div>
       <div className="edit" onClick={Update}>
@@ -33,17 +20,9 @@ function EllipsisMenu(props) {
       </div>
       {popup && (
         <Modal isOpen={popup} ariaHideApp={false} className="modal">
-          <DeleteModal
-          />
+          <DeleteModal />
         </Modal>
       )}
-      {/* {update && (
-        <Modal isOpen={update} ariaHideApp={false} className="modal">
-          <UpdateModal
-            
-          />
-        </Modal>
-      )} */}
     </div>
   );
 }

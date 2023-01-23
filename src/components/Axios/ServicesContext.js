@@ -1,20 +1,19 @@
 import { createContext, useContext } from "react";
 import axios from "axios";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
-import { parseISO } from "date-fns";
+import { format, formatISO, parseISO } from "date-fns";
+import moment from "moment";
+import { RightNavContext } from "../context/RightNavContext";
 
 const ServicesContext = createContext();
 
 const ServicesContextProvider = ({ children }) => {
-  const {
-    setData,
-    setCurrentDate,
-    setError
-  } = useContext(ReferenceDataContext);
-
+  const { setData,currentDate, setCurrentDate, setError,setGetDate } =
+    useContext(ReferenceDataContext);
+   
+    const date=formatISO(currentDate).slice(0,10);
+    console.log(date);
   const getAll = async () => {
-    // const getEVent = await getAllEvent();
-    // getEVent && setData(getEVent,...data)
     const response = await axios.get("http://localhost:5169/appointments");
     setData(response.data);
   };
@@ -22,12 +21,16 @@ const ServicesContextProvider = ({ children }) => {
     const response = await axios.get(
       `http://localhost:5169/appointments/event?Event=${event}`
     );
-    // setSelect(response.data);
     console.log(response.data, "event");
-
     setCurrentDate(parseISO(response.data.fromTime));
-    // getAll()
   };
+
+  const getByDate =async ()=>{
+    const response =await axios.get(`http://localhost:5169/appointments/date?Date=${date}`);
+    // console.log(response.data);
+    setGetDate(response.data)
+    
+  }
 
   const create = async (createItem) => {
     await axios
@@ -43,7 +46,6 @@ const ServicesContextProvider = ({ children }) => {
     await axios
       .put(`http://localhost:5169/appointments`, editItem)
       .catch((error) => {
-        // console.log(error.response.data);
         setError(error.response.data);
       });
     setCurrentDate(parseISO(editItem.fromTime));
@@ -57,7 +59,7 @@ const ServicesContextProvider = ({ children }) => {
 
   return (
     <ServicesContext.Provider
-      value={{ getAll, getByName, create, updateEvent, deleteEvent }}
+      value={{ getAll, getByName, getByDate,create, updateEvent, deleteEvent }}
     >
       {children}
     </ServicesContext.Provider>

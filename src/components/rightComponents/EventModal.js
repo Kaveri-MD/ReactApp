@@ -1,16 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faXmark ,faTrashCan,faPencil} from "@fortawesome/free-solid-svg-icons";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import moment from "moment";
+import "../../styles/calendar/eventModal.scss"
+import { RightNavContext } from "../context/RightNavContext";
+import Modal from "react-modal";
+import DeleteModal from "./DeleteModal";
 
-function EventModal(props) {
-  const { eventClick, getId } = props;
-  const { data } = useContext(ReferenceDataContext);
+function EventModal() {
+
+  const { data,getId,setGetId,setEvent } = useContext(ReferenceDataContext);
+  const {Delete,Update} = useContext(RightNavContext);
+  
+
+  const closeEvent = () => {
+    setEvent(false);
+    setGetId("")
+  };
   const filteredEvent = data.filter((item) => {
     return item.id === getId;
   });
-  // console.log(filteredEvent);
   const from =
     filteredEvent[0].fromTime.slice(11, 13) % 12 === 0
       ? 12
@@ -30,7 +40,7 @@ function EventModal(props) {
           <FontAwesomeIcon
             className="xmark"
             icon={faXmark}
-            onClick={eventClick}
+            onClick={closeEvent}
           />
         </div>
         <div className="title">
@@ -62,28 +72,17 @@ function EventModal(props) {
               toMeridiem}
           </div>
         </div>
-
-        {/* <form onSubmit={addInput}>
-            <div className="title">
-              <div>Title</div>
-              <input type="text" value={input.title} onChange={(e)=>setInput({...input,title:e.target.value})}></input>
-            </div>
-            <div className="date">
-              <div>Date</div>
-              <input type="date" value={input.date} onChange={(e)=>setInput({...input,date:e.target.value})}></input>
-            </div>
-            <div className="from-time">
-              <div>From</div>
-              <input type='time' value={input.from} onChange={(e)=>setInput({...input,from:e.target.value})}></input>
-            </div>
-            <div className="to-time">
-              <div>To</div>
-              <input type='time' value={input.to} onChange={(e)=>setInput({...input,to:e.target.value})}></input>
-            </div>
-            </form>
-            <button  className="primary-button" onClick={props.toggleModal}>Close</button>
-            <button className="primary-button" onClick={addInput} >Save</button> */}
+        <div className="icons">
+          <FontAwesomeIcon icon={faPencil} className="edit-icon"  onClick={Update}/>       
+          <FontAwesomeIcon icon={faTrashCan} className="trash-icon" onClick={Delete}/>
+        </div>
       </div>
+      {/* {isDelete && (
+        <Modal isOpen={isDelete} ariaHideApp={false} className="modal">
+          <DeleteModal />
+        </Modal>
+      )} */}
+
     </div>
   );
 }

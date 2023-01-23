@@ -1,63 +1,57 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
-import axios from "axios";
 import moment from "moment";
-import { faUserInjured } from "@fortawesome/free-solid-svg-icons";
 import uuid from "react-uuid";
 import { parseISO } from "date-fns";
 import { ServicesContext } from "../Axios/ServicesContext";
+import "../../styles/leftNavigation/createModal.scss"
 
 function CreateModal(props) {
-  const {modal,setModal} = props
-  // const[input,setInput,data,setData] = useCreateEvent();
-  // const [input,setInput] = useState({title:"",date:"",from:"",to:""});
-  // const [title,setTitle] = useState("");
-  // const [date,setDate] = useState("");
-  // const [from,setFrom] = useState("");
-  // const [to,setTo] = useState("");
-  // const [data,setData] = useState([]);
+  const { modal, setModal } = props;
+  const { data, setError, getId, setIcon, setGetId } =
+    useContext(ReferenceDataContext);
+  const { create, updateEvent } = useContext(ServicesContext);
 
-  // useEffect(()=>{
-  //   addInput()
-  // },[])
-  const {  data, setData,error,setError,getId,icon, setIcon,update, setUpdate,setGetId} = useContext(ReferenceDataContext);
-  const {create,updateEvent}=useContext(ServicesContext)
-  console.log(getId)
   const filteredEvent = data.filter((item) => {
     return item.id === getId;
   });
-  // console.log(filteredEvent[0].eventName)
-  const handleInput = ()=>{
-    return getId?{
-      title: filteredEvent[0].eventName,
-      date: filteredEvent[0].fromTime.slice(0, 10),
-      from: filteredEvent[0].fromTime.slice(11, 16),
-      to: filteredEvent[0].toTime.slice(11, 16),
-    }:{ title: "", date: "", from: "", to: "" }
-   }
-  const [input ,setInput]=useState(handleInput())
-  
-  const UpdateItem=()=>{
-    // console.log("kaveri")
+
+  const handleInput = () => {
+    return getId
+      ? {
+          title: filteredEvent[0].eventName,
+          date: filteredEvent[0].fromTime.slice(0, 10),
+          from: filteredEvent[0].fromTime.slice(11, 16),
+          to: filteredEvent[0].toTime.slice(11, 16),
+        }
+      : { title: "", date: "", from: "", to: "" };
+  };
+
+  const [input, setInput] = useState(handleInput());
+
+  const UpdateItem = () => {
     const editItem = {
       id: filteredEvent[0].id,
       eventName: input.title,
       fromTime: moment(
-      input.date + "" +input.from,
+        input.date + "" + input.from,
         "YYYY-MM-DDTHH:mm:ss"
       ).format("YYYY-MM-DDTHH:mm:ss"),
-      toTime: moment(input.date + "" +input.to, "YYYY-MM-DDTHH:mm:ss").format(
+      toTime: moment(input.date + "" + input.to, "YYYY-MM-DDTHH:mm:ss").format(
         "YYYY-MM-DDTHH:mm:ss"
-      )
+      ),
+    };
+    if (parseISO(editItem.fromTime) < new Date()) {
+      setError("Meeting does not allowed for past");
+    } else {
+      updateEvent(editItem);
+      setInput("");
+      // setIcon(false);
     }
-    updateEvent(editItem)
-    setIcon(false);
-    // setModal(false)
-      // setUpdate(!update);
-      setGetId("")
-  }
-  const CreateEvent=()=>{
+    setGetId("");
+  };
+  const CreateEvent = () => {
     const createItem = {
       id: uuid(),
       eventName: input.title,
@@ -69,59 +63,23 @@ function CreateModal(props) {
         "YYYY-MM-DDTHH:mm:ss"
       ),
     };
-    if (parseISO(createItem.fromTime) < new Date())
-    {
+    if (parseISO(createItem.fromTime) < new Date()) {
       setError("Meeting does not allowed for past");
-      // setModal(false)
+    } else {
+      create(createItem);
+      setInput("");
     }
-    // e.preventDefault();
-    else{
-     create(createItem)
-    //  setModal(false)
-     setInput("")
-      // await axios.post("http://localhost:5169/appointments", createItem)
-      // .catch((error)=>{
-      //  setError(error.response.data);
-      // })
-    }
-
-  }
-  // const {input,setInput,data,setData} = props
-  // console.log(moment(input.date + '' +input.to,'YYYY-MM-DDTHH:mm:ss').format("YYYY-MM-DDTHH:mm:ss"))
-  const addInput =  (e) => {
-    
-  
-   
-    // getId &&(
-    //   setInput({
-    //     title: filteredEvent[0].eventName,
-    //     date: filteredEvent[0].fromTime.slice(0, 10),
-    //     from: filteredEvent[0].fromTime.slice(11, 16),
-    //     to: filteredEvent[0].toTime.slice(11, 16),
-    //   })
-    // )
-    
-    getId ? (UpdateItem()):(CreateEvent())
-    setModal(false);
-
-    
-     
-
-    
-    // setData([...data,post.data])
-    
-    
-    // setData([input,...data]);
-
-    // console.log(input);
-    // setData()
   };
-  const close = () =>{
-    setModal(false)
+  const addInput = (e) => {
+    getId ? UpdateItem() : CreateEvent();
+    setModal(false);
+  };
+  const close = () => {
+    setModal(false);
     console.log(modal);
-    setInput("")
-    setGetId("")
-  }
+    setInput("");
+    setGetId("");
+  };
   return (
     <div>
       <div className="modal-content">
@@ -172,5 +130,3 @@ function CreateModal(props) {
 }
 
 export default CreateModal;
-
-// value={input.title} onChange={(e)=>setInput({...input,title:e.target.value})

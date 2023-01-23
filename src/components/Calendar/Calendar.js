@@ -8,32 +8,29 @@ import {
   format,
   setDate,
 } from "date-fns";
-import "../../styles/calendar.scss";
+import "../../styles/calendar/calendar.scss";
 import Cell from "./Cell";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import { ServicesContext } from "../Axios/ServicesContext";
-import axios from "axios";
 import Modal from "react-modal";
-import EventModal from "./EventModal";
+import EventModal from "../rightComponents/EventModal";
+
 
 function Calendar() {
   const {
     data,
-    setData,
     currentDate,
     setCurrentDate,
     prevMonth,
     nextMonth,
-    getId,
     setGetId,
+    setModal,
+    event, 
+    setEvent
   } = useContext(ReferenceDataContext);
 
-  const {getAll}=useContext(ServicesContext)
+  const { getAll } = useContext(ServicesContext);
   useEffect(() => {
-    //  axios.get("http://localhost:5169/appointments").then((response)=>{
-
-    //    setData(response.data);
-    //  })
     getAll();
   }, []);
 
@@ -49,13 +46,17 @@ function Calendar() {
     const date = setDate(currentDate, index);
     setCurrentDate(date);
     console.log(currentDate, "date");
+
   };
-  const [event, setEvent] = useState(false);
+
 
   const eventClick = (id) => {
     setGetId(id);
-    setEvent(!event);
+    setEvent(true);
   };
+  const createModal=()=>{
+    setModal(true)
+  }
 
   return (
     <div>
@@ -89,35 +90,25 @@ function Calendar() {
           const isCurrentDate = date === currentDate.getDate();
 
           return (
-            <div className="calendar-item" onClick={() => selectedDate(date)}>
+            <div className="calendar-item" onClick={() => selectedDate(date)} onDoubleClick={createModal}>
               <Cell key={date} isActive={isCurrentDate}>
-                <div className="display-date">{date}</div>
+                <div>{date}</div>
               </Cell>
-              <Cell>
+              <div className="scroll-event">
                 {data &&
                   data.map((item) => {
                     return (
                       item.fromTime.slice(0, 10) ===
                         format(setDate(currentDate, date), "yyyy-MM-dd") && (
-                      
-                          // <div className="event-container">
-                             <div
+                        <div
                           className="display-event"
-                          onClick={() => {
-                            eventClick(item.id);
-                          }}
                         >
-                         {console.log(item.fromTime.slice(0, 10))}
-                          {item.eventName}
+                          <Cell>{item.eventName}</Cell>
                         </div>
-
-                       
-                    // </div>
                       )
-                         
                     );
                   })}
-              </Cell>
+              </div>
             </div>
           );
         })}
@@ -126,11 +117,7 @@ function Calendar() {
             <Cell></Cell>
           </div>
         ))}
-        {event && (
-          <Modal isOpen={event} ariaHideApp={false} className="modal">
-            <EventModal eventClick={eventClick} getId={getId} />
-          </Modal>
-        )}
+
       </div>
     </div>
   );
