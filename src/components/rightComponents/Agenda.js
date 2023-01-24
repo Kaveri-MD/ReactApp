@@ -5,6 +5,10 @@ import "../../styles/rightNavigation/agenda.scss";
 import Modal from "react-modal";
 import EventModal from "./EventModal";
 import { ServicesContext } from "../Axios/ServicesContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+faEllipsis
+} from "@fortawesome/free-solid-svg-icons";
 
 function Agenda() {
   const { currentDate, data, event, setEvent, getId, setGetId,getDate } =
@@ -40,6 +44,7 @@ function Agenda() {
             item.fromTime.slice(0, 10) ===
               format(currentDate, "yyyy-MM-dd") && (
               <div className="event-notes" onDoubleClick={()=>handleEvent(item.id)}>
+                <FontAwesomeIcon icon={faEllipsis} className="event-icon" />
                 <div className="title">
                   <div className="title-text">Event</div>
                   <div>: {item.eventName}</div>

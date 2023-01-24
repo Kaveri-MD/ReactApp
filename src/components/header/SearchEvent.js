@@ -4,6 +4,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import { parseISO } from "date-fns";
+import moment from "moment";
 import "../../styles/header/searchEvent.scss";
 
 function SearchEvent() {
@@ -26,9 +27,10 @@ function SearchEvent() {
     const response = await axios.get(
       `http://localhost:5169/appointments/event?Event=${event}`
     );
-
+    
     setCurrentDate(parseISO(response.data.fromTime));
   };
+  
 
   return (
     <div className="suggestion-container">
@@ -37,7 +39,7 @@ function SearchEvent() {
         <input
           className="text-area"
           type="text"
-          placeholder="Search"
+          placeholder="Search by event title"
           value={search}
           onChange={handleFilter}
         ></input>
@@ -53,7 +55,9 @@ function SearchEvent() {
               className="suggestion"
               onClick={() => getEvent(item.eventName)}
             >
-              {item.eventName}
+              <div>{item.eventName}</div>
+              <div>{moment(item.fromTime).format("Do MMM")}</div>
+              {console.log(moment(item.fromTime).format("Do MMM"))}
             </div>
           ))}
         </div>

@@ -9,8 +9,8 @@ const ReferenceDataContextProvider = ({ children }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [select, setSelect] = useState([]);
   const [day, setDay] = useState(false);
-  const [error, setError] = useState("");
-  const [errorPopUp, setErrorPopUp] = useState(true);
+  const [error, setError] = useState('');
+  const [errorPopUp, setErrorPopUp] = useState(false);
   const [modal, setModal] = useState(false);
   const [angle, setAngle] = useState(false);
   const [monthAngle, setMonthAngle] = useState(false);

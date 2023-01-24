@@ -3,19 +3,23 @@ import { useState } from "react";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import moment from "moment";
 import uuid from "react-uuid";
-import { parseISO } from "date-fns";
+import { formatISO, parseISO, subDays, subHours } from "date-fns";
 import { ServicesContext } from "../Axios/ServicesContext";
-import "../../styles/leftNavigation/createModal.scss"
+import "../../styles/leftNavigation/createModal.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 function CreateModal(props) {
   const { modal, setModal } = props;
-  const { data, setError, getId, setIcon, setGetId } =
+  const { data, setError, getId, setIcon, setGetId, currentDate } =
     useContext(ReferenceDataContext);
   const { create, updateEvent } = useContext(ServicesContext);
+  const [field,setField] = useState(false)
 
   const filteredEvent = data.filter((item) => {
     return item.id === getId;
   });
+  // console.log(formatISO(currentDate).slice(0,10),"summa")
 
   const handleInput = () => {
     return getId
@@ -25,7 +29,12 @@ function CreateModal(props) {
           from: filteredEvent[0].fromTime.slice(11, 16),
           to: filteredEvent[0].toTime.slice(11, 16),
         }
-      : { title: "", date: "", from: "", to: "" };
+      : {
+          title: "",
+          date: formatISO(currentDate).slice(0, 10),
+          from: "",
+          to: "",
+        };
   };
 
   const [input, setInput] = useState(handleInput());
@@ -42,13 +51,14 @@ function CreateModal(props) {
         "YYYY-MM-DDTHH:mm:ss"
       ),
     };
+
     if (parseISO(editItem.fromTime) < new Date()) {
-      setError("Meeting does not allowed for past");
+      setError("Event can't be created - Time has passed");
     } else {
       updateEvent(editItem);
       setInput("");
-      // setIcon(false);
     }
+    // setIcon(false);
     setGetId("");
   };
   const CreateEvent = () => {
@@ -64,26 +74,32 @@ function CreateModal(props) {
       ),
     };
     if (parseISO(createItem.fromTime) < new Date()) {
-      setError("Meeting does not allowed for past");
+      setError("Event can't be created - Time has passed");
     } else {
       create(createItem);
       setInput("");
     }
   };
   const addInput = (e) => {
-    getId ? UpdateItem() : CreateEvent();
-    setModal(false);
+    if ((input.title && input.from && input.to) === "") {
+      setField(true)
+      setModal(true);
+    } else {
+      getId ? UpdateItem() : CreateEvent();
+      setModal(false);
+    }
   };
   const close = () => {
     setModal(false);
-    console.log(modal);
+    // console.log(modal);
     setInput("");
     setGetId("");
   };
+  
   return (
     <div>
       <div className="modal-content">
-        <div className="add">NEW EVENT</div>
+        <div className="add">{getId ? "EVENT" : "NEW EVENT"}</div>
         <form onSubmit={addInput}>
           <div className="title">
             <div className="title-text">Title</div>
@@ -92,13 +108,23 @@ function CreateModal(props) {
               value={input.title}
               onChange={(e) => setInput({ ...input, title: e.target.value })}
             ></input>
+            { (field && input.title==="") &&
+            (<div className="form-error">
+              <FontAwesomeIcon icon={faCaretUp} className="form-error-angle" />
+              <div className="form-error-text">
+                Please fill out this field !!
+              </div>
+            </div>)
+            }
           </div>
+
           <div className="date">
             <div className="date-text">Date</div>
             <input
               type="date"
               value={input.date}
               onChange={(e) => setInput({ ...input, date: e.target.value })}
+              min={moment(new Date()).format("yyyy-MM-DD")}
             ></input>
           </div>
           <div className="from-time">
@@ -108,6 +134,14 @@ function CreateModal(props) {
               value={input.from}
               onChange={(e) => setInput({ ...input, from: e.target.value })}
             ></input>
+            { (field && input.from==="") &&
+            (<div className="form-error">
+              <FontAwesomeIcon icon={faCaretUp} className="form-error-angle" />
+              <div className="form-error-text">
+                Please fill out this field !!
+              </div>
+            </div>)
+            }
           </div>
           <div className="to-time">
             <div className="to-text">To</div>
@@ -116,8 +150,17 @@ function CreateModal(props) {
               value={input.to}
               onChange={(e) => setInput({ ...input, to: e.target.value })}
             ></input>
+            { (field && input.to==="") &&
+            (<div className="form-error">
+              <FontAwesomeIcon icon={faCaretUp} className="form-error-angle" />
+              <div className="form-error-text">
+                Please fill out this field !!
+              </div>
+            </div>)
+            }
           </div>
         </form>
+
         <button className="primary-button" onClick={close}>
           Close
         </button>

@@ -1,5 +1,6 @@
 import { useState, createContext ,useContext} from "react";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
+import { subDays,format } from "date-fns";
 
 const RightNavContext = createContext();
 
@@ -9,7 +10,7 @@ const RightNavContextProvider = ({ children }) => {
   const [popup, setPopup] = useState(false);
 
   // const[isDelete,setIsDelete] =useState(false);
-  const { setModal,setEvent,setGetId } = useContext(ReferenceDataContext);
+  const { setModal,setEvent,setGetId ,currentDate,setError} = useContext(ReferenceDataContext);
 
   const Delete = () => {
     setIcon(false);
@@ -20,8 +21,8 @@ const RightNavContextProvider = ({ children }) => {
   };
   // {!isDelete && setEvent(false)}
   const Update = () => {
+    (currentDate > subDays(new Date(),1)) ? setModal(true) : setError("Event can't be created - Time has passed");
     setIcon(false);
-    setModal(true);
     setEvent(false);
   };
 

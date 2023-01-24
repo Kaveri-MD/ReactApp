@@ -8,11 +8,11 @@ import { RightNavContext } from "../context/RightNavContext";
 const ServicesContext = createContext();
 
 const ServicesContextProvider = ({ children }) => {
-  const { setData,currentDate, setCurrentDate, setError,setGetDate } =
+  const { setData,currentDate, setCurrentDate, setError,setGetDate,setErrorPopUp } =
     useContext(ReferenceDataContext);
    
     const date=formatISO(currentDate).slice(0,10);
-    console.log(date);
+    // console.log(date);
   const getAll = async () => {
     const response = await axios.get("http://localhost:5169/appointments");
     setData(response.data);
@@ -21,7 +21,7 @@ const ServicesContextProvider = ({ children }) => {
     const response = await axios.get(
       `http://localhost:5169/appointments/event?Event=${event}`
     );
-    console.log(response.data, "event");
+    // console.log(response.data, "event");
     setCurrentDate(parseISO(response.data.fromTime));
   };
 
@@ -55,6 +55,8 @@ const ServicesContextProvider = ({ children }) => {
   const deleteEvent = async (id) => {
     await axios.delete(`http://localhost:5169/appointments/event/${id}`);
     getAll();
+    getByDate();
+
   };
 
   return (

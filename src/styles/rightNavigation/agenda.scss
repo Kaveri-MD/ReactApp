@@ -26,6 +26,11 @@
   text-align: left;
   box-shadow: 5px 5px 2px #f5d6e7;
 }
+.event-icon{
+  position: absolute;
+  top: 100;
+  right: 40px;
+}
 .event-notes .title,
 .event-notes .from-time {
   display: flex;

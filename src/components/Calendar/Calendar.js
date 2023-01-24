@@ -7,6 +7,7 @@ import {
   differenceInDays,
   format,
   setDate,
+  subDays,
 } from "date-fns";
 import "../../styles/calendar/calendar.scss";
 import Cell from "./Cell";
@@ -26,7 +27,8 @@ function Calendar() {
     setGetId,
     setModal,
     event, 
-    setEvent
+    setEvent,
+    setError,setErrorPopUp
   } = useContext(ReferenceDataContext);
 
   const { getAll } = useContext(ServicesContext);
@@ -45,7 +47,7 @@ function Calendar() {
   const selectedDate = (index) => {
     const date = setDate(currentDate, index);
     setCurrentDate(date);
-    console.log(currentDate, "date");
+    // console.log(currentDate, "date");
 
   };
 
@@ -54,8 +56,10 @@ function Calendar() {
     setGetId(id);
     setEvent(true);
   };
-  const createModal=()=>{
-    setModal(true)
+  const createModal=(index)=>{
+    const date = setDate(currentDate, index)
+    date < subDays(new Date(),1)  ? setError("Event can't be created - Time has passed") : setModal(true)
+    // console.log(date)
   }
 
   return (
@@ -90,7 +94,7 @@ function Calendar() {
           const isCurrentDate = date === currentDate.getDate();
 
           return (
-            <div className="calendar-item" onClick={() => selectedDate(date)} onDoubleClick={createModal}>
+            <div className="calendar-item" onClick={() => selectedDate(date)} onDoubleClick={()=>createModal(date)}>
               <Cell key={date} isActive={isCurrentDate}>
                 <div>{date}</div>
               </Cell>

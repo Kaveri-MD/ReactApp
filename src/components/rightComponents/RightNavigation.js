@@ -8,19 +8,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function RightNavigation() {
-  const { error, errorPopUp, setErrorPopUp ,setAngle,setMonthAngle} = useContext(ReferenceDataContext);
+  const { error,setError, errorPopUp, setErrorPopUp ,setAngle,setMonthAngle} = useContext(ReferenceDataContext);
  
 
   const handleXmark = () => {
     setErrorPopUp(false);
+    setError("")
   };
   const closePopUp=()=>{
+    setError("")
+    setErrorPopUp(false);
     setAngle(false)
     setMonthAngle(false)
   }
+  error && setErrorPopUp(true)
+  console.log(error)
+  console.log(errorPopUp)
   return (
     <div className="right-navigation" onClick={closePopUp}>
-      {error && errorPopUp && (
+      {(error && errorPopUp) && (
         <div className="error-container">
           <FontAwesomeIcon
             className="x-mark"
@@ -41,3 +47,7 @@ function RightNavigation() {
 }
 
 export default RightNavigation;
+
+// ref.scrollIntoView({
+//   behavior: 'smooth'
+// });

@@ -6,14 +6,19 @@ import "../../styles/leftNavigation/leftNavigation.scss";
 import Modal from "react-modal";
 import CreateModal from "./CreateModal";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
+import { subDays } from "date-fns";
 
 function LeftNavigation() {
-  const { modal, setModal,setAngle, setMonthAngle } = useContext(ReferenceDataContext);
-
+  const { modal, setModal,setAngle, setMonthAngle,currentDate,setError, setErrorPopUp ,error} = useContext(ReferenceDataContext);
+  
   const toggleModal = () => {
-    setModal(!modal);
-    console.log(modal);
-  };
+    currentDate < subDays(new Date(),1) ? setError("Event can't be created - Time has passed"):setModal(!modal);
+    // setError("Event can't be created - Time has passed");
+    console.log(error,"hi");
+  }
+  const createError =()=>{
+    setError("Event can't be created - Time has passed")
+  }
   if (modal) {
     document.body.classList.add("active-modal");
   } else {
@@ -21,10 +26,13 @@ function LeftNavigation() {
   }
 
   const closePopUp=()=>{
+    setErrorPopUp(false);
+    setError("")
     setAngle(false)
     setMonthAngle(false)
-
   }
+  console.log(currentDate);
+  // currentDate < subDays(new Date(),1) ? createError() : toggleModal
 
   return (
     <div className="left-navigation" onClick={closePopUp}>

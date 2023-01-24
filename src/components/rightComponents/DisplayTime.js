@@ -8,18 +8,27 @@ import {
   faEllipsisVertical,
   faAngleLeft,
   faAngleRight,
+  faCircle,
 } from "@fortawesome/free-solid-svg-icons";
+// import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import EllipsisMenu from "./EllipsisMenu";
 import { RightNavContext } from "../context/RightNavContext";
 import Agenda from "./Agenda";
-import "../../styles/rightNavigation/displayTime.scss"
+import "../../styles/rightNavigation/displayTime.scss";
 import { ServicesContext } from "../Axios/ServicesContext";
 
 function DisplayTime() {
-  const { currentDate, setCurrentDate, data, getId, setGetId,getDate,setGetDate } =
-    useContext(ReferenceDataContext);
+  const {
+    currentDate,
+    setCurrentDate,
+    data,
+    getId,
+    setGetId,
+    getDate,
+    setGetDate,
+  } = useContext(ReferenceDataContext);
   const { icon, setIcon } = useContext(RightNavContext);
-  const {getByDate}=useContext(ServicesContext)
+  const { getByDate } = useContext(ServicesContext);
 
   const DotClick = (id) => {
     setIcon(!icon);
@@ -32,24 +41,33 @@ function DisplayTime() {
   const nextDay = () => {
     setCurrentDate(addDays(currentDate, 1));
   };
-  useEffect(()=>{
+  useEffect(() => {
     getByDate();
-  },[currentDate])
+  }, [currentDate]);
+
+  const now = new Date();
+  const nowMins = (now.getMinutes() / 60) * 50;
+  const nowTop = 50 * now.getHours() + nowMins;
+  // console.log(moment(now).format("yyyy-MM-DD"));
   return (
-    <div className="display-time" >
+    <div className="display-time">
       <div className="time-chart">
         <div className="day">
           <div className="day-angle">
-              <FontAwesomeIcon icon={faAngleLeft}  className="calendar-day" onClick={prevDay} />
+            <FontAwesomeIcon
+              icon={faAngleLeft}
+              className="calendar-day"
+              onClick={prevDay}
+            />
             <div className="day-date">
               <div>{format(currentDate, "EEEE")}</div>
               <div>{format(currentDate, "d")}</div>
             </div>
-              <FontAwesomeIcon
-                icon={faAngleRight}
-                className="calendar-day"
-                onClick={nextDay}
-              />
+            <FontAwesomeIcon
+              icon={faAngleRight}
+              className="calendar-day"
+              onClick={nextDay}
+            />
           </div>
         </div>
 
@@ -62,6 +80,18 @@ function DisplayTime() {
           {ListItem.map((item) => (
             <div className="horizontal-bar"></div>
           ))}
+          {/* {console.log(currentDate, "hi")} */}
+          {/* {console.log(new Date(), "hi1")} */}
+
+          {format(currentDate, "yyyy-MM-dd") === format(now, "yyyy-MM-dd") && (
+            <div className="current-time-line" style={{ top: nowTop }}>
+              <div className="circle-icon">
+                <FontAwesomeIcon icon={faCircle} />
+              </div>
+              <div className="current-time"></div>
+            </div>
+          )}
+
           {getDate &&
             getDate.map((item) => {
               const minutes = moment(item.toTime.slice(11, 16), "hh:mm").diff(
@@ -72,9 +102,9 @@ function DisplayTime() {
                 item.fromTime.slice(11, 16),
                 "hours"
               );
-              const startMinute = (startTime.minutes() / 60) * 50;
+              const startMinute = (startTime.minutes() / 60) * 50.8;
 
-              const setHeight = (minutes / 60) * 51;
+              const setHeight = (minutes / 60) * 50.8;
 
               const setTop = 50.8 * startTime.hours() + startMinute;
 
@@ -107,9 +137,8 @@ function DisplayTime() {
         </div>
       </div>
       <div>
-        <Agenda/>
+        <Agenda />
       </div>
-
     </div>
   );
 }
