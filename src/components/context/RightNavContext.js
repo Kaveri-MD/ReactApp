@@ -10,7 +10,7 @@ const RightNavContextProvider = ({ children }) => {
   const [popup, setPopup] = useState(false);
 
   // const[isDelete,setIsDelete] =useState(false);
-  const { setModal,setEvent,setGetId ,currentDate,setError} = useContext(ReferenceDataContext);
+  const { setModal,setEvent,setGetId ,currentDate,setError,passedTime} = useContext(ReferenceDataContext);
 
   const Delete = () => {
     setIcon(false);

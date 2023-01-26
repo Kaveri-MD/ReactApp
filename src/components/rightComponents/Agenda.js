@@ -1,5 +1,5 @@
 import React, { useContext,useEffect } from "react";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import "../../styles/rightNavigation/agenda.scss";
 import Modal from "react-modal";
@@ -25,23 +25,24 @@ function Agenda() {
   },[currentDate])
   return (
     <div className="agenda">
-      <div className="day-planner">Day Planner</div>
+      <div className="day-planner">Day Plan</div>
       {getDate ? (
 
       
         getDate.map((item) => {
+          // console.log(parseISO(item.fromTime).getMinutes())
           const from =
-            item.fromTime.slice(11, 13) % 12 === 0
+            parseISO(item.fromTime).getHours() % 12 === 0
               ? 12
-              : item.fromTime.slice(11, 13) % 12;
+              : parseISO(item.fromTime).getHours() % 12;
           const to =
-            item.toTime.slice(11, 13) % 12 === 0
+            parseISO(item.toTime).getHours() % 12 === 0
               ? 12
-              : item.toTime.slice(11, 13) % 12;
-          const fromMeridiem = item.fromTime.slice(11, 13) < 12 ? "am" : "pm";
-          const toMeridiem = item.toTime.slice(11, 13) < 12 ? "am" : "pm";
+              : parseISO(item.toTime).getHours() % 12;
+          const fromMeridiem = parseISO(item.fromTime).getHours() < 12 ? "am" : "pm";
+          const toMeridiem = parseISO(item.toTime).getHours() < 12 ? "am" : "pm";
           return (
-            item.fromTime.slice(0, 10) ===
+            format( parseISO(item.fromTime),"yyyy-MM-dd") ===
               format(currentDate, "yyyy-MM-dd") && (
               <div className="event-notes" onDoubleClick={()=>handleEvent(item.id)}>
                 <FontAwesomeIcon icon={faEllipsis} className="event-icon" />

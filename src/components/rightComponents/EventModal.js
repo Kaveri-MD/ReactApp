@@ -7,6 +7,7 @@ import "../../styles/calendar/eventModal.scss"
 import { RightNavContext } from "../context/RightNavContext";
 import Modal from "react-modal";
 import DeleteModal from "./DeleteModal";
+import { format, parseISO } from "date-fns";
 
 function EventModal() {
 
@@ -21,6 +22,8 @@ function EventModal() {
   const filteredEvent = data.filter((item) => {
     return item.id === getId;
   });
+  // format(parseISO(filteredEvent[0].fromTime) ,"hh:mm")
+  console.log(parseISO(filteredEvent[0].toTime).getHours())
   const from =
     filteredEvent[0].fromTime.slice(11, 13) % 12 === 0
       ? 12
@@ -30,8 +33,8 @@ function EventModal() {
       ? 12
       : filteredEvent[0].toTime.slice(11, 13) % 12;
   const fromMeridiem =
-    filteredEvent[0].fromTime.slice(11, 13) < 12 ? "am" : "pm";
-  const toMeridiem = filteredEvent[0].toTime.slice(11, 13) < 12 ? "am" : "pm";
+  parseISO(filteredEvent[0].fromTime).getHours() < 12 ? "am" : "pm";
+  const toMeridiem = parseISO(filteredEvent[0].toTime).getHours() < 12 ? "am" : "pm";
   return (
     <div className="event-modal">
       <div className="modal-content">
@@ -61,13 +64,11 @@ function EventModal() {
           <div className="from-text">Time</div>
           <div style={{ color: "white" }}>
             :{" "}
-            {from +
-              filteredEvent[0].fromTime.slice(13, 16) +
+            {format(parseISO(filteredEvent[0].fromTime) ,"hh:mm")+
               " " +
               fromMeridiem +
               " - " +
-              to +
-              filteredEvent[0].toTime.slice(13, 16) +
+              format(parseISO(filteredEvent[0].toTime) ,"hh:mm") +
               " " +
               toMeridiem}
           </div>

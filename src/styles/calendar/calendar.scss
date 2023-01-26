@@ -38,9 +38,10 @@
   align-items: center;
   cursor: pointer;
 }
-.display-event {
+.display-event,.dropdown-content  {
   display: none;
 }
+ 
 
 .today {
   display: flex;

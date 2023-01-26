@@ -16,7 +16,7 @@ function Header() {
   // const [angle, setAngle] = useState(false);
   // const [monthAngle, setMonthAngle] = useState(false);
 
-  const year = currentDate.getFullYear();
+  const year = new Date().getFullYear();
   const years = Array.from(new Array(20), (val, index) => index + year);
   const months = [
     "January",
@@ -113,6 +113,7 @@ function Header() {
           <button className="today-button" onClick={() => handleSetToday()}>
             Today
           </button>
+          <div onClick={()=>handleSetToday()}>
           <NavLink
             to="/month"
             className={({ isActive }) =>
@@ -121,6 +122,8 @@ function Header() {
           >
             Month
           </NavLink>
+          </div>
+          <div onClick={()=>handleSetToday()}>
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -129,6 +132,7 @@ function Header() {
           >
             Day
           </NavLink>
+          </div>
         </div>
       </div>
     </div>

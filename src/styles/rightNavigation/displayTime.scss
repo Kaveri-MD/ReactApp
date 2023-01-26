@@ -106,13 +106,27 @@
   align-items: center;
   display: flex;
 }
-
+.hover-event{
+  @extend .display-eventbar;
+}
+.display-none{
+  display: none;
+}
+.hover-event:hover{
+  cursor: pointer;
+  height: 20px !important;
+  .display-none{
+    @extend .event-name;
+    display: flex;
+  }
+}
 .event-name {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 98%;
 }
+
 
 .dot-icon {
   padding: 10px;

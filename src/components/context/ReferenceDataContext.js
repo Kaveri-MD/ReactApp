@@ -18,6 +18,7 @@ const ReferenceDataContextProvider = ({ children }) => {
   const [display, setDisplay] = useState(true);
   const [event, setEvent] = useState(false);
   const [getDate,setGetDate]= useState();
+  const [filteredData, setFilteredData] = useState(false);
 
   const prevMonth = () => {
     setCurrentDate(sub(currentDate, { months: 1 }));
@@ -26,6 +27,8 @@ const ReferenceDataContextProvider = ({ children }) => {
   const nextMonth = () => {
     setCurrentDate(add(currentDate, { months: 1 }));
   };
+
+
 
   return (
     <ReferenceDataContext.Provider
@@ -47,7 +50,7 @@ const ReferenceDataContextProvider = ({ children }) => {
         errorPopUp,
         setErrorPopUp,
         modal,
-        setModal,angle, setAngle,monthAngle, setMonthAngle,search, setSearch,display, setDisplay,event, setEvent,getDate,setGetDate
+        setModal,angle, setAngle,monthAngle, setMonthAngle,search, setSearch,display, setDisplay,event, setEvent,getDate,setGetDate,filteredData, setFilteredData
       }}
     >
       {children}

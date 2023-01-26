@@ -11,7 +11,7 @@ import { faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 function CreateModal(props) {
   const { modal, setModal } = props;
-  const { data, setError, getId, setIcon, setGetId, currentDate } =
+  const { data, setError, getId, setIcon, setGetId, currentDate ,setErrorPopUp} =
     useContext(ReferenceDataContext);
   const { create, updateEvent } = useContext(ServicesContext);
   const [field,setField] = useState(false)
@@ -19,11 +19,11 @@ function CreateModal(props) {
   const filteredEvent = data.filter((item) => {
     return item.id === getId;
   });
-  // console.log(formatISO(currentDate).slice(0,10),"summa")
+  // console.log(filteredEvent.fromTime)
 
   const handleInput = () => {
     return getId
-      ? {
+    ? {
           title: filteredEvent[0].eventName,
           date: filteredEvent[0].fromTime.slice(0, 10),
           from: filteredEvent[0].fromTime.slice(11, 16),
@@ -35,6 +35,7 @@ function CreateModal(props) {
           from: "",
           to: "",
         };
+
   };
 
   const [input, setInput] = useState(handleInput());

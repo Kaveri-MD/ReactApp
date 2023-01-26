@@ -1,18 +1,18 @@
 import { createContext, useContext } from "react";
 import axios from "axios";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
-import { format, formatISO, parseISO } from "date-fns";
+import { format, formatISO, getDate, parseISO } from "date-fns";
 import moment from "moment";
 import { RightNavContext } from "../context/RightNavContext";
 
 const ServicesContext = createContext();
 
 const ServicesContextProvider = ({ children }) => {
-  const { setData,currentDate, setCurrentDate, setError,setGetDate,setErrorPopUp } =
+  const { setData,currentDate, setCurrentDate, setError,setGetDate,setErrorPopUp ,getDate,filteredData, setFilteredData} =
     useContext(ReferenceDataContext);
    
-    const date=formatISO(currentDate).slice(0,10);
-    // console.log(date);
+    const date=format(currentDate,"yyyy-MM-dd");
+    // console.log(format(currentDate,"yyyy-MM-dd"));
   const getAll = async () => {
     const response = await axios.get("http://localhost:5169/appointments");
     setData(response.data);
@@ -27,9 +27,8 @@ const ServicesContextProvider = ({ children }) => {
 
   const getByDate =async ()=>{
     const response =await axios.get(`http://localhost:5169/appointments/date?Date=${date}`);
-    // console.log(response.data);
     setGetDate(response.data)
-    
+    console.log(getDate);
   }
 
   const create = async (createItem) => {

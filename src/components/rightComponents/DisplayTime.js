@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { ListItem } from "../../lists/List";
-import { format, subDays, addDays } from "date-fns";
+import { format, subDays, addDays, parseISO } from "date-fns";
 import moment from "moment";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -97,25 +97,23 @@ function DisplayTime() {
               const minutes = moment(item.toTime.slice(11, 16), "hh:mm").diff(
                 moment(item.fromTime.slice(11, 16), "hh:mm"),
                 "minutes"
-              );
-              const startTime = moment.duration(
-                item.fromTime.slice(11, 16),
-                "hours"
-              );
-              const startMinute = (startTime.minutes() / 60) * 50.8;
-
-              const setHeight = (minutes / 60) * 50.8;
-
-              const setTop = 50.8 * startTime.hours() + startMinute;
-
-              return (
-                item.fromTime.slice(0, 10) ===
+                );
+                // const startTime = parseISO(item.fromTime).getHours();
+                const startMinute = (parseISO(item.fromTime).getMinutes() / 60) * 50.8;
+                
+                const setHeight = (minutes / 60) * 50.8;
+                
+                const setTop = 50.8 * parseISO(item.fromTime).getHours() + startMinute;
+                
+                return (
+                  format(parseISO(item.fromTime),"yyyy-MM-dd")===
                   format(currentDate, "yyyy-MM-dd") && (
-                  <div
-                    className="display-eventbar"
-                    style={{ height: setHeight, top: setTop }}
-                  >
-                    <div className="event-name">
+                    <div
+                    className={setHeight > 16 ?"display-eventbar":"hover-event"}
+                    style={{ height: setHeight , top: setTop }}
+                    >
+                    {/* {console.log(format(parseISO(item.fromTime),"yyyy-MM-dd"))} */}
+                    <div className={setHeight > 16 ?"event-name":"display-none"}>
                       {item.eventName}
                       <FontAwesomeIcon
                         className="dot-icon"

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import "../../styles/rightNavigation/rightNavigation.scss";
 import DisplayTime from "./DisplayTime";
 import { Routes, Route } from "react-router-dom";
@@ -16,12 +16,11 @@ function RightNavigation() {
     setError("")
   };
   const closePopUp=()=>{
-    setError("")
-    setErrorPopUp(false);
     setAngle(false)
     setMonthAngle(false)
   }
   error && setErrorPopUp(true)
+
   console.log(error)
   console.log(errorPopUp)
   return (
