@@ -9,30 +9,25 @@ import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import { subDays } from "date-fns";
 
 function LeftNavigation() {
-  const { modal, setModal,setAngle, setMonthAngle,currentDate,setError, setErrorPopUp ,error} = useContext(ReferenceDataContext);
-  
+  const { modal, setModal, setAngle, setMonthAngle, currentDate, setError } =
+    useContext(ReferenceDataContext);
+
   const toggleModal = () => {
+    currentDate < subDays(new Date(), 1)
+      ? setError("Event can't be created - Time has passed")
+      : setModal(!modal);
+  };
 
-    currentDate < subDays(new Date(),1) ? setError("Event can't be created - Time has passed"):setModal(!modal);
-    // setError("Event can't be created - Time has passed");
-    // console.log(error,"hi");
-  }
-
-  // const createError =()=>{
-  //   setError("Event can't be created - Time has passed")
-  // }
   if (modal) {
     document.body.classList.add("active-modal");
   } else {
     document.body.classList.remove("active-modal");
   }
 
-  const closePopUp=()=>{
-    setAngle(false)
-    setMonthAngle(false)
-  }
-  console.log(currentDate);
-  // currentDate < subDays(new Date(),1) ? createError() : toggleModal
+  const closePopUp = () => {
+    setAngle(false);
+    setMonthAngle(false);
+  };
 
   return (
     <div className="left-navigation" onClick={closePopUp}>

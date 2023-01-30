@@ -10,7 +10,6 @@ import {
   faAngleRight,
   faCircle,
 } from "@fortawesome/free-solid-svg-icons";
-// import { faCircle } from "@fortawesome/free-regular-svg-icons";
 import EllipsisMenu from "./EllipsisMenu";
 import { RightNavContext } from "../context/RightNavContext";
 import Agenda from "./Agenda";
@@ -18,15 +17,8 @@ import "../../styles/rightNavigation/displayTime.scss";
 import { ServicesContext } from "../Axios/ServicesContext";
 
 function DisplayTime() {
-  const {
-    currentDate,
-    setCurrentDate,
-    data,
-    getId,
-    setGetId,
-    getDate,
-    setGetDate,
-  } = useContext(ReferenceDataContext);
+  const { currentDate, setCurrentDate, getId, setGetId, getDate } =
+    useContext(ReferenceDataContext);
   const { icon, setIcon } = useContext(RightNavContext);
   const { getByDate } = useContext(ServicesContext);
 
@@ -48,7 +40,6 @@ function DisplayTime() {
   const now = new Date();
   const nowMins = (now.getMinutes() / 60) * 50;
   const nowTop = 50 * now.getHours() + nowMins;
-  // console.log(moment(now).format("yyyy-MM-DD"));
   return (
     <div className="display-time">
       <div className="time-chart">
@@ -80,8 +71,6 @@ function DisplayTime() {
           {ListItem.map((item) => (
             <div className="horizontal-bar"></div>
           ))}
-          {/* {console.log(currentDate, "hi")} */}
-          {/* {console.log(new Date(), "hi1")} */}
 
           {format(currentDate, "yyyy-MM-dd") === format(now, "yyyy-MM-dd") && (
             <div className="current-time-line" style={{ top: nowTop }}>
@@ -97,23 +86,27 @@ function DisplayTime() {
               const minutes = moment(item.toTime.slice(11, 16), "hh:mm").diff(
                 moment(item.fromTime.slice(11, 16), "hh:mm"),
                 "minutes"
-                );
-                // const startTime = parseISO(item.fromTime).getHours();
-                const startMinute = (parseISO(item.fromTime).getMinutes() / 60) * 50.8;
-                
-                const setHeight = (minutes / 60) * 50.8;
-                
-                const setTop = 50.8 * parseISO(item.fromTime).getHours() + startMinute;
-                
-                return (
-                  format(parseISO(item.fromTime),"yyyy-MM-dd")===
+              );
+              const startMinute =
+                (parseISO(item.fromTime).getMinutes() / 60) * 50.8;
+
+              const setHeight = (minutes / 60) * 50.8;
+
+              const setTop =
+                50.8 * parseISO(item.fromTime).getHours() + startMinute;
+
+              return (
+                format(parseISO(item.fromTime), "yyyy-MM-dd") ===
                   format(currentDate, "yyyy-MM-dd") && (
+                  <div
+                    className={
+                      setHeight > 16 ? "display-eventbar" : "hover-event"
+                    }
+                    style={{ height: setHeight, top: setTop }}
+                  >
                     <div
-                    className={setHeight > 16 ?"display-eventbar":"hover-event"}
-                    style={{ height: setHeight , top: setTop }}
+                      className={setHeight > 16 ? "event-name" : "display-none"}
                     >
-                    {/* {console.log(format(parseISO(item.fromTime),"yyyy-MM-dd"))} */}
-                    <div className={setHeight > 16 ?"event-name":"display-none"}>
                       {item.eventName}
                       <FontAwesomeIcon
                         className="dot-icon"

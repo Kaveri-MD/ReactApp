@@ -2,22 +2,21 @@ import React, { useContext } from "react";
 import { ServicesContext } from "../Axios/ServicesContext";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import { RightNavContext } from "../context/RightNavContext";
-import "../../styles/rightNavigation/deleteModal.scss"
+import "../../styles/rightNavigation/deleteModal.scss";
 
 function DeleteModal(props) {
   const { deleteEvent } = useContext(ServicesContext);
   const { getId, setGetId, data } = useContext(ReferenceDataContext);
-  const { Delete,setPopup } = useContext(RightNavContext);
+  const { Delete, setPopup } = useContext(RightNavContext);
   const filteredEvent = data.filter((item) => {
     return item.id === getId;
   });
   console.log(data);
 
-  const remain=()=>{
+  const remain = () => {
     setPopup(false);
-    // setEvent(false);
-    setGetId("")
-  }
+    setGetId("");
+  };
 
   const DeleteItem = () => {
     deleteEvent(filteredEvent[0].id);

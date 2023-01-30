@@ -29,13 +29,13 @@
   animation: move 1s;
 }
 @keyframes move {
-    from {
-      right: -500px;
-    }
-    to {
-      right: 0px;
-    }
+  from {
+    right: -500px;
   }
+  to {
+    right: 0px;
+  }
+}
 .x-mark {
   position: absolute;
   top: 0;
@@ -46,10 +46,8 @@
 }
 .error-message {
   font-weight: bold;
-  padding: 10px
+  padding: 10px;
 }
-
-
 
 .month {
   padding: 20px;
@@ -75,4 +73,3 @@
   background-color: white;
   z-index: 2;
 }
-

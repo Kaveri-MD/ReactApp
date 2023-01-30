@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleLeft,
@@ -12,14 +12,12 @@ import {
   format,
   setDate,
   subDays,
-  parseISO
+  parseISO,
 } from "date-fns";
 import "../../styles/calendar/calendar.scss";
 import Cell from "./Cell";
 import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import { ServicesContext } from "../Axios/ServicesContext";
-import Modal from "react-modal";
-import EventModal from "../rightComponents/EventModal";
 
 function Calendar() {
   const {
@@ -28,19 +26,14 @@ function Calendar() {
     setCurrentDate,
     prevMonth,
     nextMonth,
-    setGetId,
     setModal,
-    event,
-    setEvent,
     setError,
-    setErrorPopUp,
-    passedTime,
-    getDate,filteredData, setFilteredData
+    getDate,
+    filteredData,
+    setFilteredData,
   } = useContext(ReferenceDataContext);
 
   const { getAll, getByDate } = useContext(ServicesContext);
-
-  // const [filteredData, setFilteredData] = useState(false);
 
   useEffect(() => {
     getAll();
@@ -57,22 +50,16 @@ function Calendar() {
   const selectedDate = (index) => {
     const date = setDate(currentDate, index);
     setCurrentDate(date);
-    // console.log(currentDate, "date");
   };
 
-  const eventClick = (id) => {
-    setGetId(id);
-    setEvent(true);
-  };
   const createModal = (index) => {
     const date = setDate(currentDate, index);
     date < subDays(new Date(), 1)
       ? setError("Event can't be created - Time has passed")
       : setModal(true);
-    // console.log(date)
   };
   const handleDropDown = () => {
-    setFilteredData(!filteredData)
+    setFilteredData(!filteredData);
     getByDate();
     console.log(getDate, "hi");
   };
@@ -87,7 +74,6 @@ function Calendar() {
         </div>
         <div className="calendar-month">
           <Cell>{format(currentDate, "LLLL yyyy")}</Cell>
-          {/* <FontAwesomeIcon icon={faAngleDown}/> */}
         </div>
         <div className="calendar-angle" onClick={() => nextMonth()}>
           <Cell>
@@ -109,9 +95,8 @@ function Calendar() {
           const date = index + 1;
           const isCurrentDate = date === currentDate.getDate();
           const getData = data.filter((item) => {
-            console.log()
             return (
-              format(parseISO(item.fromTime),"yyyy-MM-dd") ===
+              format(parseISO(item.fromTime), "yyyy-MM-dd") ===
               format(setDate(currentDate, date), "yyyy-MM-dd")
             );
           });
@@ -130,10 +115,7 @@ function Calendar() {
                   getData.slice(0, 1).map((item) => {
                     return (
                       <div>
-                        <div
-                          className="display-event"
-                          onClick={handleDropDown}
-                        >
+                        <div className="display-event" onClick={handleDropDown}>
                           {item.eventName}
                           {getData.length > 1 && (
                             <FontAwesomeIcon
@@ -144,13 +126,19 @@ function Calendar() {
                         </div>
                         <div
                           className={
-                            getDate && filteredData ? "dropdown-content" : "display-none"
+                            getDate && filteredData
+                              ? "dropdown-content"
+                              : "display-none"
                           }
                         >
-                          {(getDate && filteredData ) &&
+                          {getDate &&
+                            filteredData &&
                             getDate.map((item) => {
                               return (
-                                format(parseISO(item.fromTime),"yyyy-MM-dd") ===
+                                format(
+                                  parseISO(item.fromTime),
+                                  "yyyy-MM-dd"
+                                ) ===
                                   format(
                                     setDate(currentDate, date),
                                     "yyyy-MM-dd"

@@ -5,7 +5,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.4;
-  // background: white;
   padding: 20px;
   border-radius: 25px;
   width: 500px;
@@ -27,7 +26,6 @@
   font-size: 20px;
   color: white;
   padding-bottom: 20px;
-  // float: left;
   position: relative;
 }
 .title .title-text,
@@ -46,7 +44,6 @@
   padding: 10px;
   border: 2px solid #bd2e7a;
   border-radius: 15px;
-  // float:right;
 }
 .title input,
 .date input,
@@ -55,26 +52,24 @@
   outline: none;
   border-color: #bd2e7a;
 }
-.form-error{
+.form-error {
   position: absolute;
   top: 55px;
-  left:120px;
+  left: 120px;
   z-index: 1;
   box-shadow: 0px 2px 8px #999999;
-  
 }
-.form-error-angle{
+.form-error-angle {
   position: absolute;
   top: -11px;
   left: 20px;
   color: white;
   font-size: 20px;
 }
-.form-error-text{
+.form-error-text {
   font-size: 14px;
   padding: 5px;
   color: black;
-  // border: 1px solid black;
   border-radius: 4px;
   background-color: white;
 }

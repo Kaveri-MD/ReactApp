@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "../../styles/header/header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,9 +12,14 @@ import SearchEvent from "./SearchEvent";
 import { NavLink } from "react-router-dom";
 
 function Header() {
-  const { currentDate, setCurrentDate ,angle, setAngle,monthAngle, setMonthAngle} = useContext(ReferenceDataContext);
-  // const [angle, setAngle] = useState(false);
-  // const [monthAngle, setMonthAngle] = useState(false);
+  const {
+    currentDate,
+    setCurrentDate,
+    angle,
+    setAngle,
+    monthAngle,
+    setMonthAngle,
+  } = useContext(ReferenceDataContext);
 
   const year = new Date().getFullYear();
   const years = Array.from(new Array(20), (val, index) => index + year);
@@ -113,25 +118,25 @@ function Header() {
           <button className="today-button" onClick={() => handleSetToday()}>
             Today
           </button>
-          <div onClick={()=>handleSetToday()}>
-          <NavLink
-            to="/month"
-            className={({ isActive }) =>
-              isActive ? "isactive" : "primary-button"
-            }
-          >
-            Month
-          </NavLink>
+          <div onClick={() => handleSetToday()}>
+            <NavLink
+              to="/month"
+              className={({ isActive }) =>
+                isActive ? "isactive" : "primary-button"
+              }
+            >
+              Month
+            </NavLink>
           </div>
-          <div onClick={()=>handleSetToday()}>
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive ? "isactive" : "primary-button"
-            }
-          >
-            Day
-          </NavLink>
+          <div onClick={() => handleSetToday()}>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "isactive" : "primary-button"
+              }
+            >
+              Day
+            </NavLink>
           </div>
         </div>
       </div>

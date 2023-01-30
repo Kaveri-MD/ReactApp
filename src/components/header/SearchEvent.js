@@ -6,9 +6,11 @@ import { ReferenceDataContext } from "../context/ReferenceDataContext";
 import { parseISO } from "date-fns";
 import moment from "moment";
 import "../../styles/header/searchEvent.scss";
+import { getHelper } from "../Axios/AppHelper";
 
 function SearchEvent() {
-  const { data, setCurrentDate,search, setSearch,display, setDisplay } = useContext(ReferenceDataContext);
+  const { data, setCurrentDate, search, setSearch, display, setDisplay } =
+    useContext(ReferenceDataContext);
 
   const [filterData, setFilterData] = useState([]);
 
@@ -25,12 +27,11 @@ function SearchEvent() {
     setFilterData([]);
     setSearch(event);
     const response = await axios.get(
-      `http://localhost:5169/appointments/event?Event=${event}`
+      getHelper(`appointments/event?Event=${event}`)
     );
-    
+
     setCurrentDate(parseISO(response.data.fromTime));
   };
-  
 
   return (
     <div className="suggestion-container">
@@ -57,7 +58,6 @@ function SearchEvent() {
             >
               <div>{item.eventName}</div>
               <div>{moment(item.fromTime).format("Do MMM")}</div>
-              {console.log(moment(item.fromTime).format("Do MMM"))}
             </div>
           ))}
         </div>

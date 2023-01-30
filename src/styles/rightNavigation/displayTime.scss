@@ -13,7 +13,6 @@
   overflow-y: auto;
   border-radius: 25px;
   margin-left: 5px;
-
 }
 .time-chart::-webkit-scrollbar {
   display: none;
@@ -28,7 +27,6 @@
   background-color: white;
   z-index: 2;
   width: 49%;
-
 }
 .day-angle {
   padding-left: 40px;
@@ -38,11 +36,9 @@
   align-items: center;
 }
 .day-date {
-
   text-align: center;
 }
 .calendar-day {
-  // margin-left: 20px;
   cursor: pointer;
 }
 
@@ -72,25 +68,20 @@
   border-top: 1px solid;
   border-left: 1px solid;
 }
-.current-time-line{
+.current-time-line {
   display: flex;
   align-items: center;
-  // justify-content:center ;
-  // flex-direction: row;
   position: absolute;
   top: -8px;
   z-index: 1;
 }
-.current-time{
-  // position: absolute;
-  border-top:3px solid #bd2e7a ;
+.current-time {
+  border-top: 3px solid #bd2e7a;
   width: calc(80vw - 525px);
-
 }
-.circle-icon{
+.circle-icon {
   color: #bd2e7a;
   font-size: 14px;
-
 }
 
 .display-eventbar {
@@ -99,23 +90,23 @@
   padding-left: 10px;
   margin-left: 1px;
   width: 100%;
-  background-color:#f9bbdc90;
+  background-color: #f9bbdc90;
   color: #bd2e7a;
   border-left: 5px solid #bd2e7a;
   box-sizing: border-box;
   align-items: center;
   display: flex;
 }
-.hover-event{
+.hover-event {
   @extend .display-eventbar;
 }
-.display-none{
+.display-none {
   display: none;
 }
-.hover-event:hover{
+.hover-event:hover {
   cursor: pointer;
   height: 20px !important;
-  .display-none{
+  .display-none {
     @extend .event-name;
     display: flex;
   }
@@ -126,7 +117,6 @@
   align-items: center;
   width: 98%;
 }
-
 
 .dot-icon {
   padding: 10px;

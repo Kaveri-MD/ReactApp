@@ -3,12 +3,10 @@ import Modal from "react-modal";
 import DeleteModal from "./DeleteModal";
 
 import { RightNavContext } from "../context/RightNavContext";
-import "../../styles/rightNavigation/ellipsisMenu.scss"
+import "../../styles/rightNavigation/ellipsisMenu.scss";
 
-function EllipsisMenu(props) {
- 
-  const { popup, Delete, Update} = useContext(RightNavContext);
-
+function EllipsisMenu() {
+  const { popup, Delete, Update } = useContext(RightNavContext);
 
   return (
     <div>

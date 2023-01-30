@@ -38,10 +38,10 @@
   align-items: center;
   cursor: pointer;
 }
-.display-event,.dropdown-content  {
+.display-event,
+.dropdown-content {
   display: none;
 }
- 
 
 .today {
   display: flex;
@@ -54,7 +54,6 @@
   border-radius: 100%;
   margin: 2px;
 }
-
 
 .event-container {
   border: 1px solid black;

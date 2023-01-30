@@ -97,9 +97,6 @@
   font-weight: bold;
 }
 
-
-
-
 .header .calendar-angle {
   color: white;
   font-size: 20px;
@@ -118,12 +115,8 @@
   font-size: 20px;
   font-weight: bold;
   width: 80px;
-  // border: 1px solid white;
   height: 22px;
 }
-
-
-
 
 .control-yearmonth {
   display: flex;
@@ -139,12 +132,9 @@
 .year-dropdown {
   background-color: white;
   color: black;
-  // padding-left: 10px;
   padding: 2px 2px 2px 10px;
-  // border-radius: 4px;
   font-size: 16px;
   font-weight: 500;
-  // text-align: center;
   cursor: pointer;
 }
 .month-container {

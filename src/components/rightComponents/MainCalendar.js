@@ -1,6 +1,6 @@
 import React from "react";
 import Calendar from "../Calendar/Calendar";
-import "../../styles/rightNavigation/mainCalendar.scss"
+import "../../styles/rightNavigation/mainCalendar.scss";
 function MainCalendar() {
   return (
     <div className="main-calendar">
