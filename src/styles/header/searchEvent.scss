@@ -1,0 +1,45 @@
+.suggestion-container {
+  height: 30px;
+}
+.search-box {
+  border: 2px solid #bd2e7a;
+  border-radius: 15px;
+  padding: 5px;
+  background-color: white;
+  width: 210px;
+}
+.search-icon {
+  margin-left: 5px;
+}
+.text-area {
+  border: none;
+  font-size: 14px;
+  margin-left: 10px;
+  height: 20px;
+}
+.text-area:focus {
+  outline: none;
+}
+.suggestion-box {
+  border-radius: 4px;
+  max-height: 180px;
+  background-color: white;
+  box-shadow: 0px 2px 8px #999999;
+  overflow-y: auto;
+}
+.suggestion-box::-webkit-scrollbar {
+  display: none;
+}
+.suggestion {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  color: black;
+  padding: 10px 22px;
+  width: 180px;
+  cursor: pointer;
+}
+.suggestion:hover {
+  background-color: #f5d6e7;
+  color: #bd2e7a;
+}
